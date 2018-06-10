@@ -1,0 +1,14 @@
+##create bean dao,this is a interface
+package ${bean.beanDaoUrl};
+
+
+/**
+ * @author $!{annotation.authorName}
+ * @email $!{annotation.authorMail}>
+ * @date $!{annotation.date}
+ *
+ * @version $!{annotation.version}
+ */
+public interface $!{bean.name}Dao {
+
+}

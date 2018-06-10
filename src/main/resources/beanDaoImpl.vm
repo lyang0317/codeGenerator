@@ -1,0 +1,15 @@
+##create bean daoImpl,this is a class
+package $!{bean.beanDaoImplUrl};
+
+import $!{bean.beanDaoUrl}.$!{bean.name}Dao;
+
+/**
+ * @author $!{annotation.authorName}
+ * @email $!{annotation.authorMail}>
+ * @date $!{annotation.date}
+ *
+ * @version $!{annotation.version}
+ */
+public class $!{bean.name}DaoImpl implements $!{bean.name}Dao{
+
+}

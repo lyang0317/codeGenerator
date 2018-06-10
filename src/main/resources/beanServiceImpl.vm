@@ -1,0 +1,22 @@
+##create bean serviceImpl,this is a class
+package $!{bean.beanServiceImplUrl};
+
+import $!{bean.beanDaoUrl}.$!{bean.name}Dao;
+import $!{bean.beanServiceUrl}.$!{bean.name}Service;
+
+/**
+ * @author $!{annotation.authorName}
+ * @email $!{annotation.authorMail}>
+ * @date $!{annotation.date}
+ *
+ * @version $!{annotation.version}
+ */
+public class $!{bean.name}ServiceImpl implements $!{bean.name}Service{
+
+	/**
+	 * $!{bean.lowerName} Dao
+	 */
+	private $!{bean.name}Dao $!{bean.lowerName}Dao;
+	
+
+}

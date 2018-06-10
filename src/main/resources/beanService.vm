@@ -1,0 +1,15 @@
+##create bean service,this is a interface
+package $!{bean.beanServiceUrl};
+
+
+
+/**
+ * @author $!{annotation.authorName}
+ * @email $!{annotation.authorMail}>
+ * @date $!{annotation.date}
+ *
+ * @version $!{annotation.version}
+ */
+public interface $!{bean.name}Service {
+
+}
