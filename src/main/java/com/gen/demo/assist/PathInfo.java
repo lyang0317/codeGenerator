@@ -7,7 +7,7 @@ import com.gen.demo.Main;
 
 /**
  *
- * DSV: DAO-SERVICE-VELOCITY
+ * JVP: DAO-SERVICE-VELOCITY
  * @author fanhaibo
  * @date 2018年06月10日12:11:34
  * @version 1.0.0 snapshot

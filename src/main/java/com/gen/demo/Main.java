@@ -1,6 +1,6 @@
 package com.gen.demo;
 
-import com.gen.demo.assist.DSV;
+import com.gen.demo.assist.JVP;
 
 /**
  * @author fanhaibo (2018年06月10日) and hongten (2013-3-10)
@@ -10,16 +10,15 @@ import com.gen.demo.assist.DSV;
  */
 public class Main {
 
-    public static final DSV DAO = new DSV();
+    public static final JVP DAO = new JVP();
 
     static {
 
         //生成dao代码
-        DAO.setDS("Dao.java");
-        DAO.setDSImpl("DaoImpl.java");
+        DAO.setJavaSuffix("Dao.java");
         DAO.setVmName("beanDao.vm");
         DAO.setDesc("说明");
-        DAO.setDSPath("/genFile/");
+        DAO.setJavaFilePath("/genFile/");
 
 
     }

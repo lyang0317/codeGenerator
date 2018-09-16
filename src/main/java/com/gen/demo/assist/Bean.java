@@ -1,7 +1,8 @@
 package com.gen.demo.assist;
 
-import java.util.HashMap;
 
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -10,8 +11,10 @@ import java.util.HashMap;
  * @version 1.0.0 snapshot
  *
  */
-public class Bean extends HashMap<String,Object> {
+public class Bean {
 
+
+    private static final Map<String,Object> map = new HashMap<>();
     /**
      * bean 名称
      */
@@ -24,23 +27,7 @@ public class Bean extends HashMap<String,Object> {
      * bean 路径
      */
     private String beanUrl;
-    /**
-     * dao 路径
-     */
     private String beanDaoUrl;
-    /**
-     * dao 实现路径
-     */
-    private String beanDaoImplUrl;
-    /**
-     * service 路径
-     */
-    private String beanServiceUrl;
-    /**
-     * service 实现路径
-     */
-    private String beanServiceImplUrl;
-
     public String getName() {
         return name;
     }
@@ -49,9 +36,6 @@ public class Bean extends HashMap<String,Object> {
         this.name = name;
     }
 
-    public String getLowerName() {
-        return lowerName;
-    }
 
     public void setLowerName(String lowerName) {
         this.lowerName = lowerName;
@@ -61,7 +45,7 @@ public class Bean extends HashMap<String,Object> {
         return beanUrl;
     }
 
-    public void setBeanUrl(String beanUrl) {
+    public void setBeanName(String beanUrl) {
         this.beanUrl = beanUrl;
     }
 
@@ -73,33 +57,8 @@ public class Bean extends HashMap<String,Object> {
         this.beanDaoUrl = beanDaoUrl;
     }
 
-    public String getBeanDaoImplUrl() {
-        return beanDaoImplUrl;
-    }
-
-    public void setBeanDaoImplUrl(String beanDaoImplUrl) {
-        this.beanDaoImplUrl = beanDaoImplUrl;
-    }
-
-    public String getBeanServiceUrl() {
-        return beanServiceUrl;
-    }
-
-    public void setBeanServiceUrl(String beanServiceUrl) {
-        this.beanServiceUrl = beanServiceUrl;
-    }
-
-    public String getBeanServiceImplUrl() {
-        return beanServiceImplUrl;
-    }
-
-    public void setBeanServiceImplUrl(String beanServiceImplUrl) {
-        this.beanServiceImplUrl = beanServiceImplUrl;
-    }
-
-    @Override
     public Bean put(String key, Object value) {
-        super.put(key, value);
+        map.put(key, value);
         return this;
     }
 }

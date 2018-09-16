@@ -38,13 +38,13 @@ public class BeanUtils {
      * @throws Exception
      */
 
-    public void createBeanFiles(String entityName, DSV daoDsv) {
-        initVMParameters(entityName, daoDsv);
+    public void createBeanFiles(String entityName, JVP daoJVP) {
+        initVMParameters(entityName, daoJVP);
 
-        createDsFiles(entityName, daoDsv);
+        createDsFiles(entityName, daoJVP);
     }
 
-    private void initVMParameters(String entityName, DSV dsv) {
+    private void initVMParameters(String entityName, JVP JVP) {
         bean.setLowerName(getLowercaseChar(entityName));
         devInfo.setAuthorName(ConfigData.AUTHOR_NAME.getValue());
         devInfo.setAuthorMail(ConfigData.AUTHOR_MAIL.getValue());
@@ -52,10 +52,9 @@ public class BeanUtils {
         devInfo.setDate(simpleDateFormat.format(new Date()));
         devInfo.setVersion(ConfigData.VERSION.getValue());
         bean.setName(entityName);
-        bean.setBeanUrl(entityName);
 
         //处理路径, 把文件放到指定位置
-        String absPath = PathInfo.getFileAbsPath(dsv.getDSPath(), dsv.getDS());
+        String absPath = PathInfo.getFileAbsPath(JVP.getJavaFilePath(), JVP.getJavaSuffix());
         String packagePath = PathInfo.toJavaPackage(absPath);
 
 
@@ -64,20 +63,20 @@ public class BeanUtils {
 
     }
 
-    private void createDsFiles(String entityName, DSV dsv) {
-        String vmName = dsv.getVmName();
-        String fileSuffix = dsv.getDS();
-        doCreateFiles(entityName, fileSuffix, vmName, dsv);
+    private void createDsFiles(String entityName, JVP JVP) {
+        String vmName = JVP.getVmName();
+        String fileSuffix = JVP.getJavaSuffix();
+        doCreateFiles(entityName, fileSuffix, vmName, JVP);
     }
 
 
-    private void doCreateFiles(String entityName, String packagePath, String vmName, DSV dsv) {
+    private void doCreateFiles(String entityName, String packagePath, String vmName, JVP JVP) {
 
 
         //
         try {
 
-            String absPath = PathInfo.getFileAbsPath(dsv.getDSPath(), dsv.getDS());
+            String absPath = PathInfo.getFileAbsPath(JVP.getJavaFilePath(), JVP.getJavaSuffix());
 
             File filePath = new File(absPath);
             //创建目录
@@ -126,7 +125,7 @@ public class BeanUtils {
         Template template = velocityEngine.getTemplate(fileVMPath);
         VelocityContext velocityContext = new VelocityContext();
         velocityContext.put("bean", bean);
-        velocityContext.put("annotation", devInfo);
+        velocityContext.put("devInfo", devInfo);
 
         //
         List<String> fields = new ArrayList<>();
