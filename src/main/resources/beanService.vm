@@ -9,6 +9,6 @@ package ${bean.beanDaoUrl};
 *
 * @version $!{devInfo.version}
 */
-public class $!{bean.name}ServiceImpl implements $!{bean.name}Service{
+public interface $!{bean.name}Service{
 
 }
