@@ -1,15 +1,14 @@
-##create bean service,this is a interface
-package $!{bean.beanServiceUrl};
-
+##create bean dao,this is a interface
+package ${bean.beanDaoUrl};
 
 
 /**
- * @author $!{devInfo.authorName}
- * @email $!{devInfo.authorMail}>
- * @date $!{devInfo.date}
- *
- * @version $!{devInfo.version}
- */
-public interface $!{bean.name}Service {
+* @author $!{devInfo.authorName}
+* @email $!{devInfo.authorMail}>
+* @date $!{devInfo.date}
+*
+* @version $!{devInfo.version}
+*/
+public class $!{bean.name}ServiceImpl implements $!{bean.name}Service{
 
 }

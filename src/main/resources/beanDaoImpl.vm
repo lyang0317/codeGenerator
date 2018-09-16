@@ -1,15 +1,14 @@
-##create bean daoImpl,this is a class
-package $!{bean.beanDaoImplUrl};
+##create bean dao,this is a interface
+package ${bean.beanDaoUrl};
 
-import $!{bean.beanDaoUrl}.$!{bean.name}Dao;
 
 /**
- * @author $!{devInfo.authorName}
- * @email $!{devInfo.authorMail}>
- * @date $!{devInfo.date}
- *
- * @version $!{devInfo.version}
- */
+* @author $!{devInfo.authorName}
+* @email $!{devInfo.authorMail}>
+* @date $!{devInfo.date}
+*
+* @version $!{devInfo.version}
+*/
 public class $!{bean.name}DaoImpl implements $!{bean.name}Dao{
 
 }

@@ -3,12 +3,12 @@ package ${bean.beanDaoUrl};
 
 
 /**
- * @author $!{devInfo.authorName}
- * @email $!{devInfo.authorMail}>
- * @date $!{devInfo.date}
- *
- * @version $!{devInfo.version}
- */
+* @author $!{devInfo.authorName}
+* @email $!{devInfo.authorMail}>
+* @date $!{devInfo.date}
+*
+* @version $!{devInfo.version}
+*/
 public interface $!{bean.name}Dao {
 
 }
