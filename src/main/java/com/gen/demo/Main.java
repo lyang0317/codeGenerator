@@ -14,6 +14,7 @@ public class Main {
     public static final JVP DAO_IMPL = new JVP();
     public static final JVP SERVICE = new JVP();
     public static final JVP SERVICE_IMPL = new JVP();
+    public static final JVP MODEL = new JVP();
 
     static {
 
@@ -37,22 +38,41 @@ public class Main {
         SERVICE_IMPL.setVmName("beanServiceImpl.vm");
         SERVICE_IMPL.setDesc("说明");
         SERVICE_IMPL.setJavaFilePath("/genFile/");
+
+        MODEL.setJavaSuffix("Entity.java");
+        MODEL.setVmName("beanEntity.vm");
+        MODEL.setDesc("说明");
+        MODEL.setJavaFilePath("/genFile/");
     }
 
     private static Main ins = new Main();
 
     public static void main(String[] args) throws Exception {
 
-        BeanUtils beanUtils = new BeanUtils();
-        ins.beanTool(beanUtils, "User");
+        GeneratorJavaFileUtils generatorJavaFileUtils = new GeneratorJavaFileUtils();
+        ins.beanTool(generatorJavaFileUtils, "User");
     }
 
-    public void beanTool(BeanUtils beanUtils, String targetEntity) throws Exception {
-        beanUtils.createBeanFiles(targetEntity, Main.DAO);
-        beanUtils.createBeanFiles(targetEntity, Main.DAO_IMPL);
-        beanUtils.createBeanFiles(targetEntity, Main.SERVICE);
-        beanUtils.createBeanFiles(targetEntity, Main.SERVICE_IMPL);
+    public void beanTool(GeneratorJavaFileUtils generatorJavaFileUtils, String targetEntity) throws Exception {
+
+        MODEL.setModelInfoMap("name","名称");
+        MODEL.setModelInfoMap("age","年龄");
+
+
+        generatorJavaFileUtils.createBeanFiles(targetEntity, Main.DAO);
+        generatorJavaFileUtils.createBeanFiles(targetEntity, Main.DAO_IMPL);
+        generatorJavaFileUtils.createBeanFiles(targetEntity, Main.SERVICE);
+        generatorJavaFileUtils.createBeanFiles(targetEntity, Main.SERVICE_IMPL);
+        generatorJavaFileUtils.createBeanFiles(targetEntity, Main.MODEL);
     }
+
+
+
+
+
+
+
+
 }
 
 

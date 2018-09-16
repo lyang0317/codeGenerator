@@ -9,6 +9,23 @@ package ${bean.beanDaoUrl};
 *
 * @version $!{devInfo.version}
 */
-public interface $!{bean.name}Dao {
+public class $!{bean.name}Entity {
+
+    #foreach($key in $map.keySet() )
+        //$map.get($key)
+        private String $key;
+    #end
+    #foreach($getter in $GSetter.keySet() )
+        #set( $fieldName = $GSetter.get($getter) )
+
+        public void set$getter(String $fieldName){
+            this.$fieldName=$fieldName;
+        }
+
+        public String get$getter(){
+            return this.$fieldName;
+        }
+    #end
+
 
 }

@@ -1,5 +1,8 @@
 package com.gen.demo.assist;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * JVP: javaFile, velocity, path
  *
@@ -11,10 +14,12 @@ package com.gen.demo.assist;
 public class JVP {
 
 
-    String JavaSuffix;//dao/service interface suffix
-    String javaFilePath;//dao/service interface's path
-    String vmName; //dao/service velocity file name
-    String desc; //remark
+    private String JavaSuffix;//dao/service interface suffix
+    private String javaFilePath;//dao/service interface's path
+    private String vmName; //dao/service velocity file name
+    private String desc; //remark
+
+    private Map<String, Object> modelInfoMap = new HashMap<>();
 
     /**
      * @return //Dao.java
@@ -56,5 +61,13 @@ public class JVP {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public Map<String, Object> getModelInfoMap() {
+        return modelInfoMap;
+    }
+
+    public void setModelInfoMap(String key, Object value) {
+        this.modelInfoMap.put(key, value);
     }
 }

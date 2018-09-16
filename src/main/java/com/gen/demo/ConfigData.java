@@ -23,7 +23,7 @@ public enum ConfigData {
     DEF_PROJECT_PATH("/src/main/java/", "MAVEN 非测试类的项目绝对路径参数"),
     DEF_PROJECT_TEST_PATH("/src/test/java/", "MAVEN 测试类的项目绝对路径参数"),
 
-    AUTHOR_NAME("java_author", "作者"),
+    AUTHOR_NAME("stefan", "作者"),
     AUTHOR_MAIL("my_email@gmail.com", "邮箱"),
     VERSION("0.0.1", "版本号"),
     DATE_FORMAT("yyyy-MM-dd", "日期格式化样式"),

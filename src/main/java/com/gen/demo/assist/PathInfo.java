@@ -1,6 +1,6 @@
 package com.gen.demo.assist;
 
-import com.gen.demo.BeanUtils;
+import com.gen.demo.GeneratorJavaFileUtils;
 import com.gen.demo.ConfigData;
 import com.gen.demo.Main;
 
@@ -29,7 +29,7 @@ public class PathInfo {
     /**
      * 目前只处理maven结构: 选择绝对路径参数 /src/main/java/  OR /src/test/java/
      */
-    private static final String PROJECT_VALUE = classFileAbsPath.contains(BeanUtils.PROJECT_TEST_PATH) ?
+    private static final String PROJECT_VALUE = classFileAbsPath.contains(GeneratorJavaFileUtils.PROJECT_TEST_PATH) ?
             ConfigData.DEF_PROJECT_TEST_PATH.getValue() : ConfigData.DEF_PROJECT_PATH.getValue();
 
     private static final String PROJECT_DESC = ConfigData.DEF_PROJECT_PATH.getDesc();

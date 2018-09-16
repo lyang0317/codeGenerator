@@ -23,7 +23,7 @@ import java.util.*;
  * @date 2018年06月10日12:11:34
  */
 
-public class BeanUtils {
+public class GeneratorJavaFileUtils {
 
 
     public static String PROJECT_PATH = ConfigData.PROJECT_PATH.getValue();// /target/classes/
@@ -70,13 +70,13 @@ public class BeanUtils {
     }
 
 
-    private void doCreateFiles(String entityName, String packagePath, String vmName, JVP JVP) {
+    private void doCreateFiles(String entityName, String packagePath, String vmName, JVP jvp) {
 
 
         //
         try {
 
-            String absPath = PathInfo.getFileAbsPath(JVP.getJavaFilePath(), JVP.getJavaSuffix());
+            String absPath = PathInfo.getFileAbsPath(jvp.getJavaFilePath(), jvp.getJavaSuffix());
 
             File filePath = new File(absPath);
             //创建目录
@@ -86,7 +86,7 @@ public class BeanUtils {
             File file = new File(fileName);
             FileWriter fw = new FileWriter(file);
 
-            String GeneratedCodeFile = createCodeByVelocity(vmName, bean, devInfo);
+            String GeneratedCodeFile = createCodeByVelocity(vmName, bean, devInfo,jvp.getModelInfoMap());
             fw.write(GeneratedCodeFile);
             fw.flush();
             fw.close();
@@ -104,15 +104,11 @@ public class BeanUtils {
      * @param fileVMPath 模板路径
      * @param bean       目标bean
      * @param devInfo 注释
+     * @param map
      * @return
      * @throws Exception
      */
-    private String createCodeByVelocity(String fileVMPath, Bean bean, DevInfo devInfo) throws Exception {
-
-        //Map:: key:field, value:remark
-        // TODO: 2018/9/16 实体类所需要的字段和注释
-        Map<String, Object> map = new HashMap<>();
-        map.put("name", "名字");
+    private String createCodeByVelocity(String fileVMPath, Bean bean, DevInfo devInfo, Map<String, Object> map) throws Exception {
 
         VelocityEngine velocityEngine = new VelocityEngine();
         velocityEngine.setProperty("input.encoding", "UTF-8");
@@ -127,12 +123,14 @@ public class BeanUtils {
         velocityContext.put("bean", bean);
         velocityContext.put("devInfo", devInfo);
 
-        //
-        List<String> fields = new ArrayList<>();
+        velocityContext.put("map", map);
+        Map<String, Object> newMap = new HashMap<>();
         for (Map.Entry<String, Object> entry : map.entrySet()) {
-            fields.add(entry.getKey());
+//            entry.getKey()
+            String GSetter = FieldUtils.lineToHumpGSetter(entry.getKey());
+            newMap.put(GSetter,entry.getKey());
         }
-
+        velocityContext.put("GSetter", newMap);
 //        System.out.println(fields);
 
         StringWriter stringWriter = new StringWriter();
