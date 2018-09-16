@@ -14,13 +14,13 @@ import com.gen.demo.Main;
  *
  */
 
-public class DaoAndServicePathInfo {
+public class PathInfo {
 
 
     //获取项目根绝对路径
     private static String absPath = System.getProperty("user.dir");
     //获取运行时绝对路径
-    private static String classFileAbsPath = DaoAndServicePathInfo.class.getResource("/").getPath();
+    private static String classFileAbsPath = PathInfo.class.getResource("/").getPath();
     // 运行时当前包路径 com.google.generator
     private static String packagePath = Main.class.getPackage().getName();// com.google.generator
     // com/google/generator
@@ -44,24 +44,13 @@ public class DaoAndServicePathInfo {
         System.out.println("\t\t\t#################################################");
         System.out.println("\t\t\t#################################################");
 
-        cacheMap.put(PathKeyManager.CLASS_RUNTIME_ABS_PATH, classFileAbsPath)
-                .put(PathKeyManager.PROJECT_ABS_PATH, absPath)
-                .put(PathKeyManager.PACKAGE_PATH, packagePath)
-                .put(PathKeyManager.PACKAGE_PATH_, packagePath_);
+        cacheMap.put(PathConstant.CLASS_RUNTIME_ABS_PATH, classFileAbsPath)
+                .put(PathConstant.PROJECT_ABS_PATH, absPath)
+                .put(PathConstant.PACKAGE_PATH, packagePath)
+                .put(PathConstant.PACKAGE_PATH_, packagePath_);
     }
 
 
-    public static String getAbsPath() {
-        return absPath;
-    }
-
-    public static String getPackagePath_() {
-        return packagePath_;
-    }
-
-    public static String getFilePackagePath() {
-        return packagePath;
-    }
 
     /**
      * @return UserServiceImpl.java path eg: /Users/van/src/main/java/com/google/generator/service/impl

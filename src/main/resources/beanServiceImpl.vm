@@ -5,11 +5,11 @@ import $!{bean.beanDaoUrl}.$!{bean.name}Dao;
 import $!{bean.beanServiceUrl}.$!{bean.name}Service;
 
 /**
- * @author $!{annotation.authorName}
- * @email $!{annotation.authorMail}>
- * @date $!{annotation.date}
+ * @author $!{devInfo.authorName}
+ * @email $!{devInfo.authorMail}>
+ * @date $!{devInfo.date}
  *
- * @version $!{annotation.version}
+ * @version $!{devInfo.version}
  */
 public class $!{bean.name}ServiceImpl implements $!{bean.name}Service{
 

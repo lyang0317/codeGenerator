@@ -9,7 +9,7 @@ package com.gen.demo.assist;
  * @version 1.0.0 snapshot
  *
  */
-public class Annotation {
+public class DevInfo {
 
     /**
      * 作者名称

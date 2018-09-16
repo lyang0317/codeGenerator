@@ -4,11 +4,11 @@ package $!{bean.beanServiceUrl};
 
 
 /**
- * @author $!{annotation.authorName}
- * @email $!{annotation.authorMail}>
- * @date $!{annotation.date}
+ * @author $!{devInfo.authorName}
+ * @email $!{devInfo.authorMail}>
+ * @date $!{devInfo.date}
  *
- * @version $!{annotation.version}
+ * @version $!{devInfo.version}
  */
 public interface $!{bean.name}Service {
 

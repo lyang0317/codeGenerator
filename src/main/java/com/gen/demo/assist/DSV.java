@@ -1,36 +1,47 @@
 package com.gen.demo.assist;
 
 /**
- *
  * DSV: DAO-SERVICE-VELOCITY
- * @author fanhaibo
- * @date 2018年06月10日12:11:34
- * @version 1.0.0 snapshot
  *
+ * @author fanhaibo
+ * @version 1.0.0 snapshot
+ * @date 2018年06月10日12:11:34
  */
 
-public enum DSV {
+public class DSV {
 
-    DAO("Dao.java", "/dao/", "DaoImpl.java", "/dao/impl/", "beanDao.vm", "beanDaoImpl.vm", "说明"),
-    SERVICE("Service.java", "/service/", "ServiceImpl.java", "/service/impl/", "beanService.vm", "beanServiceImpl.vm", "说明");
 
-    String DS;
-    String DSPath_;
-    String DSImpl;
-    String DSImplPath_;
-    String vmName;
-    String vmImplName;
-    String desc;
+    String DS;//dao/service interface suffix
+    String DSPath;//dao/service interface's path
+    String DSImpl; //dao/service implement
+    String DSImplPath;//dao/service implement's path
+    String vmName; //dao/service velocity file name
+    String vmImplName; //ao/service implement velocity file name
+    String desc; //remark
 
-    DSV(String DS, String DSPath_, String DSImpl, String DSImplPath_, String vmName, String vmImplName, String desc) {
-        this.DS = DS;
-        this.DSPath_ = DSPath_;
-        this.DSImpl = DSImpl;
-        this.DSImplPath_ = DSImplPath_;
-        this.vmName = vmName;
-        this.vmImplName = vmImplName;
-        this.desc = desc;
+    String modelName;
+
+    public String getModelName() {
+        return modelName;
     }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
+    public DSV() {
+
+    }
+
+//    DSV(String DS, String DSPath, String DSImpl, String DSImplPath, String vmName, String vmImplName, String desc) {
+//        this.DS = DS;
+//        this.DSPath = DSPath;
+//        this.DSImpl = DSImpl;
+//        this.DSImplPath = DSImplPath;
+//        this.vmName = vmName;
+//        this.vmImplName = vmImplName;
+//        this.desc = desc;
+//    }
 
     /**
      * @return //Dao.java
@@ -42,8 +53,8 @@ public enum DSV {
     /**
      * @return /dao/
      */
-    public String getDSPath_() {//
-        return DSPath_;
+    public String getDSPath() {//
+        return DSPath;
     }
 
     /**
@@ -53,8 +64,8 @@ public enum DSV {
         return DSImpl;
     }
 
-    public String getDSImplPath_() {
-        return DSImplPath_;
+    public String getDSImplPath() {
+        return DSImplPath;
     }
 
     /**
@@ -70,5 +81,33 @@ public enum DSV {
 
     public String getVmImplName() {
         return vmImplName;
+    }
+
+    public void setDS(String DS) {
+        this.DS = DS;
+    }
+
+    public void setDSPath(String DSPath) {
+        this.DSPath = DSPath;
+    }
+
+    public void setDSImpl(String DSImpl) {
+        this.DSImpl = DSImpl;
+    }
+
+    public void setDSImplPath(String DSImplPath) {
+        this.DSImplPath = DSImplPath;
+    }
+
+    public void setVmName(String vmName) {
+        this.vmName = vmName;
+    }
+
+    public void setVmImplName(String vmImplName) {
+        this.vmImplName = vmImplName;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }

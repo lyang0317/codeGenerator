@@ -13,30 +13,24 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 
 /**
- * @date 2013-3-10
- *
  * @author fanhaibo (2018年06月10日) and hongten (2013-3-10)
- * @date 2018年06月10日12:11:34
  * @version 1.0.0 snapshot
- *
+ * @date 2013-3-10
+ * @date 2018年06月10日12:11:34
  */
 
 public class BeanUtils {
-
-
-    private static String DAO_FLAG = DSV.DAO.toString();
-    private static String SERVICE_FLAG = DSV.SERVICE.toString();
 
 
     public static String PROJECT_PATH = ConfigData.PROJECT_PATH.getValue();// /target/classes/
     public static String PROJECT_TEST_PATH = ConfigData.PROJECT_TEST_PATH.getValue();//SpringBoot
 
     private static Bean bean = new Bean();
-    private static Annotation annotation = new Annotation();
+    private static DevInfo devInfo = new DevInfo();
 
     /**
      * 创建bean的Service的实现<br>
@@ -44,64 +38,46 @@ public class BeanUtils {
      * @throws Exception
      */
 
-    public void createBeanFiles(String entityName, DSV daoDsv) throws Exception {
+    public void createBeanFiles(String entityName, DSV daoDsv) {
         initVMParameters(entityName, daoDsv);
 
         createDsFiles(entityName, daoDsv);
-        createDsImplFiles(entityName, daoDsv);
     }
 
     private void initVMParameters(String entityName, DSV dsv) {
         bean.setLowerName(getLowercaseChar(entityName));
-        annotation.setAuthorName(ConfigData.AUTHOR_NAME.getValue());
-        annotation.setAuthorMail(ConfigData.AUTHOR_MAIL.getValue());
+        devInfo.setAuthorName(ConfigData.AUTHOR_NAME.getValue());
+        devInfo.setAuthorMail(ConfigData.AUTHOR_MAIL.getValue());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(ConfigData.DATE_FORMAT.getValue());
-        annotation.setDate(simpleDateFormat.format(new Date()));
-        annotation.setVersion(ConfigData.VERSION.getValue());
+        devInfo.setDate(simpleDateFormat.format(new Date()));
+        devInfo.setVersion(ConfigData.VERSION.getValue());
         bean.setName(entityName);
         bean.setBeanUrl(entityName);
 
-        String daoPath = DaoAndServicePathInfo.getFileAbsPath(dsv.getDSPath_(), dsv.getDS());
-        String daoImplPath = DaoAndServicePathInfo.getFileAbsPath(dsv.getDSImplPath_(), dsv.getDSImpl());
+        //处理路径, 把文件放到指定位置
+        String absPath = PathInfo.getFileAbsPath(dsv.getDSPath(), dsv.getDS());
+        String packagePath = PathInfo.toJavaPackage(absPath);
 
-        String daoPackage = DaoAndServicePathInfo.toJavaPackage(daoPath);
-        String daoImplPackage = DaoAndServicePathInfo.toJavaPackage(daoImplPath);
 
-        if (DAO_FLAG.equalsIgnoreCase(dsv.toString())) {
-            bean.setBeanDaoUrl(daoPackage);
-            bean.setBeanDaoImplUrl(daoImplPackage);
-        } else if (SERVICE_FLAG.equalsIgnoreCase(dsv.toString())) {
-            bean.setBeanServiceUrl(daoPackage);
-            bean.setBeanServiceImplUrl(daoImplPackage);
-        } else {
-            //TODO
-        }
+        bean.setBeanDaoUrl(packagePath);
 
 
     }
 
     private void createDsFiles(String entityName, DSV dsv) {
-        String absPath_ = dsv.getDSPath_();
         String vmName = dsv.getVmName();
-        String packagePath = dsv.getDS();
-        doCreateFiles(entityName, absPath_, packagePath, vmName, dsv);
+        String fileSuffix = dsv.getDS();
+        doCreateFiles(entityName, fileSuffix, vmName, dsv);
     }
 
-    private void createDsImplFiles(String entityName, DSV dsv) {
-        String dsImplPath_ = dsv.getDSImplPath_();
-        String vmImplName = dsv.getVmImplName();
-        String dsImpl = dsv.getDSImpl();
-        doCreateFiles(entityName, dsImplPath_, dsImpl, vmImplName, dsv);
-    }
 
-    private void doCreateFiles(String entityName, String path_, String packagePath, String vmName, DSV dsv) {
+    private void doCreateFiles(String entityName, String packagePath, String vmName, DSV dsv) {
 
 
         //
         try {
 
-            String absPath = DaoAndServicePathInfo.getFileAbsPath(path_,
-                    path_.contains("impl") ? dsv.getDSImpl() : dsv.getDS());
+            String absPath = PathInfo.getFileAbsPath(dsv.getDSPath(), dsv.getDS());
 
             File filePath = new File(absPath);
             //创建目录
@@ -111,7 +87,7 @@ public class BeanUtils {
             File file = new File(fileName);
             FileWriter fw = new FileWriter(file);
 
-            String GeneratedCodeFile = createCodeByVelocity(vmName, bean, annotation);
+            String GeneratedCodeFile = createCodeByVelocity(vmName, bean, devInfo);
             fw.write(GeneratedCodeFile);
             fw.flush();
             fw.close();
@@ -128,11 +104,17 @@ public class BeanUtils {
      *
      * @param fileVMPath 模板路径
      * @param bean       目标bean
-     * @param annotation 注释
+     * @param devInfo 注释
      * @return
      * @throws Exception
      */
-    private String createCodeByVelocity(String fileVMPath, Bean bean, Annotation annotation) throws Exception {
+    private String createCodeByVelocity(String fileVMPath, Bean bean, DevInfo devInfo) throws Exception {
+
+        //Map:: key:field, value:remark
+        // TODO: 2018/9/16 实体类所需要的字段和注释
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", "名字");
+
         VelocityEngine velocityEngine = new VelocityEngine();
         velocityEngine.setProperty("input.encoding", "UTF-8");
         velocityEngine.setProperty("output.encoding", "UTF-8");
@@ -144,7 +126,16 @@ public class BeanUtils {
         Template template = velocityEngine.getTemplate(fileVMPath);
         VelocityContext velocityContext = new VelocityContext();
         velocityContext.put("bean", bean);
-        velocityContext.put("annotation", annotation);
+        velocityContext.put("annotation", devInfo);
+
+        //
+        List<String> fields = new ArrayList<>();
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            fields.add(entry.getKey());
+        }
+
+//        System.out.println(fields);
+
         StringWriter stringWriter = new StringWriter();
         template.merge(velocityContext, stringWriter);
         return stringWriter.toString();
@@ -189,7 +180,7 @@ public class BeanUtils {
         ObjectMapper mapper = new ObjectMapper();
         try {
             System.out.println();
-            String json = mapper.writeValueAsString(DaoAndServicePathInfo.cacheMap);
+            String json = mapper.writeValueAsString(PathInfo.cacheMap);
             JsonFormatter.printFormattingJson(json);
             System.out.println();
         } catch (JsonProcessingException e) {

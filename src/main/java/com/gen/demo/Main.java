@@ -1,20 +1,28 @@
 package com.gen.demo;
 
 import com.gen.demo.assist.DSV;
-import com.gen.demo.assist.DaoAndServicePathInfo;
-import org.junit.Test;
-
-import java.io.File;
 
 /**
- * @date 2013-3-10
- *
  * @author fanhaibo (2018年06月10日) and hongten (2013-3-10)
- * @date 2018年06月10日12:11:34
  * @version 1.0.0 snapshot
- *
+ * @date 2013-3-10
+ * @date 2018年06月10日12:11:34
  */
 public class Main {
+
+    public static final DSV DAO = new DSV();
+
+    static {
+
+        //生成dao代码
+        DAO.setDS("Dao.java");
+        DAO.setDSImpl("DaoImpl.java");
+        DAO.setVmName("beanDao.vm");
+        DAO.setDesc("说明");
+        DAO.setDSPath("/genFile/");
+
+
+    }
 
     private static Main ins = new Main();
 
@@ -24,17 +32,8 @@ public class Main {
         ins.beanTool(beanUtils, "User");
     }
 
-    /**
-     * 根据bean生成相应的文件
-     *
-     * @param beanUtils
-     * @param targetEntity eg: User--> UserDao,UserDaoImpl,UserService,UserServiceImpl
-     * @throws Exception
-     */
     public void beanTool(BeanUtils beanUtils, String targetEntity) throws Exception {
-        beanUtils.createBeanFiles(targetEntity, DSV.DAO);
-        beanUtils.createBeanFiles(targetEntity,DSV.SERVICE);
-
+        beanUtils.createBeanFiles(targetEntity, Main.DAO);
     }
 }
 

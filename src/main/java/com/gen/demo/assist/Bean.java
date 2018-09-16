@@ -4,9 +4,8 @@ import java.util.HashMap;
 
 
 /**
- * @date 2013-3-10
  *
- * @author fanhaibo (2018年06月10日) and hongten (2013-3-10)
+ * @author fanhaibo (2018年06月10日)
  * @date 2018年06月10日12:11:34
  * @version 1.0.0 snapshot
  *

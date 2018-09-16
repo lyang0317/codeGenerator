@@ -36,6 +36,8 @@ public class HelloVelocity {
         ctx.put("datetime", (new Date()).toLocaleString());
         ctx.put("className", "MyVMTest");
         ctx.put("comments", "11111");
+        ctx.put("iAmVariable", "iAmVariable");
+        ctx.put("iAmVariable", "iAmVariable");
         ctx.put("date", (new Date()).toString());
 
         List temp = new ArrayList();

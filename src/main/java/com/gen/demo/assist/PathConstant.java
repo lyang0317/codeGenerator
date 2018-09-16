@@ -9,7 +9,7 @@ package com.gen.demo.assist;
  *
  */
 
-public class PathKeyManager {
+public class PathConstant {
 
     public static final String CLASS_RUNTIME_ABS_PATH = "classFileAbsPath"; //字节码运行时的路径 -> ../target/classes/
     public static final String PROJECT_ABS_PATH = "project_abs_path"; //项目根路径
