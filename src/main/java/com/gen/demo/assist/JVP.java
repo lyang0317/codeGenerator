@@ -1,6 +1,6 @@
 package com.gen.demo.assist;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -19,7 +19,7 @@ public class JVP {
     private String vmName; //dao/service velocity file name
     private String desc; //remark
 
-    private Map<String, Object> modelInfoMap = new HashMap<>();
+    private Map<String, Object> modelInfoMap = new LinkedHashMap<>();
 
     /**
      * @return //Dao.java
