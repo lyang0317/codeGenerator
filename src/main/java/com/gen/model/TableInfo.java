@@ -1,5 +1,7 @@
-package com.gen.mapper;
+package com.gen.model;
 
+
+import com.gen.util.FieldUtils;
 
 /**
  * @author stefan
@@ -11,8 +13,10 @@ public class TableInfo {
 
     //字段名称
     private String columnName;
+    private String colNameHump ;//驼峰
+    private String gsetter; //驼峰切首字母大写
     //字段注释
-    private String columnComment;
+    private String columnComment; 
     //数据类型,JDBC TYPE
     private String dataType;
 
@@ -34,6 +38,24 @@ public class TableInfo {
 
     public String getDataType() {
         return dataType;
+    }
+
+    public String getColNameHump() {
+
+        return FieldUtils.lineToHump(columnName);
+    }
+
+    public void setColNameHump(String colNameHump) {
+        this.colNameHump = colNameHump;
+    }
+
+    public String getGsetter() {
+        String gSetter = FieldUtils.lineToHumpGSetter(columnName);
+        return gSetter;
+    }
+
+    public void setGsetter(String gsetter) {
+        this.gsetter = gsetter;
     }
 
     public void setDataType(String dataType) {
