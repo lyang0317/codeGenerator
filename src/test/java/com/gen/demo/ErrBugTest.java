@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ public class ErrBugTest {
 
     /**
      * 测试从数据库获取表的描述数据
+     *
      * @throws JsonProcessingException
      */
     @Test
@@ -34,7 +36,10 @@ public class ErrBugTest {
         String dbName = "axiom";
         List<TableInfo> columnInfo = errBugTogetherService.getColumnInfo(tabName, dbName);
         String json = new ObjectMapper().writeValueAsString(columnInfo);
-        System.out.println(json);
+        System.err.println(json);
+
+        boolean empty = ObjectUtils.isEmpty(columnInfo);
+        assert (false == empty);
 
     }
 
