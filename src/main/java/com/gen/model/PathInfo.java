@@ -1,13 +1,14 @@
-package com.gen.demo.assist;
+package com.gen.model;
 
-import com.gen.demo.GeneratorJavaFileUtils;
+import com.gen.core.GeneratorJavaFileUtils;
 import com.gen.demo.ConfigData;
 import com.gen.demo.Main;
+import com.gen.demo.assist.PathConstant;
 
 
 /**
  *
- * JVP: DAO-SERVICE-VELOCITY
+ * GeneratedFileInfo: DAO-SERVICE-VELOCITY
  * @author fanhaibo
  * @date 2018年06月10日12:11:34
  * @version 1.0.0 snapshot

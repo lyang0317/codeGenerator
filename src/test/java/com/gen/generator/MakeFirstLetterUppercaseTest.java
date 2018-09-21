@@ -1,9 +1,9 @@
-package com.gen.demo.assist;
+package com.gen.generator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MakeFirstLetterUppercase {
+public class MakeFirstLetterUppercaseTest {
     public static void main(String[] args) {
         String str = "this is a java test String upcase: 123string";
         System.out.println(str);

@@ -1,4 +1,4 @@
-package com.gen.demo.assist;
+package com.gen.model;
 
 
 /**
@@ -9,7 +9,7 @@ package com.gen.demo.assist;
  * @version 1.0.0 snapshot
  *
  */
-public class DevInfo {
+public class DeveloperInfo {
 
     /**
      * 作者名称

@@ -1,4 +1,4 @@
-package com.gen.demo.assist;
+package com.gen.util;
 
 
 /**

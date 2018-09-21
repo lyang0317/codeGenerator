@@ -1,6 +1,7 @@
 package com.gen.demo;
 
-import com.gen.demo.assist.JVP;
+import com.gen.core.GeneratorJavaFileUtils;
+import com.gen.model.GeneratedFileInfo;
 
 /**
  * @author fanhaibo (2018年06月10日) and hongten (2013-3-10)
@@ -10,11 +11,11 @@ import com.gen.demo.assist.JVP;
  */
 public class Main {
 
-    public static final JVP DAO = new JVP();
-    public static final JVP DAO_IMPL = new JVP();
-    public static final JVP SERVICE = new JVP();
-    public static final JVP SERVICE_IMPL = new JVP();
-    public static final JVP MODEL = new JVP();
+    public static final GeneratedFileInfo DAO = new GeneratedFileInfo();
+    public static final GeneratedFileInfo DAO_IMPL = new GeneratedFileInfo();
+    public static final GeneratedFileInfo SERVICE = new GeneratedFileInfo();
+    public static final GeneratedFileInfo SERVICE_IMPL = new GeneratedFileInfo();
+    public static final GeneratedFileInfo MODEL = new GeneratedFileInfo();
 
     static {
 

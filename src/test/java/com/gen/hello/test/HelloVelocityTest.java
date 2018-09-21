@@ -1,4 +1,4 @@
-package com.gen.generator;
+package com.gen.hello.test;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class HelloVelocity {
+public class HelloVelocityTest {
     public static void main(String[] args) {
 
 
         System.out.println(System.getProperty("user.dir"));
 
-        System.out.println(TestMain.class.getPackage().getName());
+//        System.out.println(TestMain.class.getPackage().getName());
 
         VelocityEngine ve = new VelocityEngine();
         ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");

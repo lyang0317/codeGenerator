@@ -13,7 +13,7 @@ public class TableInfo {
     private String columnName;
     //字段注释
     private String columnComment;
-    //数据类型
+    //数据类型,JDBC TYPE
     private String dataType;
 
     public String getColumnName() {

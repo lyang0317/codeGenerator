@@ -1,17 +1,17 @@
-package com.gen.demo.assist;
+package com.gen.model;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * JVP: javaFile, velocity, path
+ * GeneratedFileInfo: javaFile, velocity, path
  *
  * @author fanhaibo
  * @version 1.0.0 snapshot
  * @date 2018年06月10日12:11:34
  */
 
-public class JVP {
+public class GeneratedFileInfo {
 
 
     private String JavaSuffix;//dao/service interface suffix

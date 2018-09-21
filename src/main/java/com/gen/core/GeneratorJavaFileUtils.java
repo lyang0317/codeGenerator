@@ -1,8 +1,14 @@
-package com.gen.demo;
+package com.gen.core;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gen.demo.assist.*;
+import com.gen.demo.ConfigData;
+import com.gen.model.Bean;
+import com.gen.model.DeveloperInfo;
+import com.gen.model.GeneratedFileInfo;
+import com.gen.model.PathInfo;
+import com.gen.util.FieldUtils;
+import com.gen.util.JsonFormatter;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -30,7 +36,7 @@ public class GeneratorJavaFileUtils {
     public static String PROJECT_TEST_PATH = ConfigData.PROJECT_TEST_PATH.getValue();//SpringBoot
 
     private static Bean bean = new Bean();
-    private static DevInfo devInfo = new DevInfo();
+    private static DeveloperInfo developerInfo = new DeveloperInfo();
 
     /**
      * 创建bean的Service的实现<br>
@@ -38,23 +44,23 @@ public class GeneratorJavaFileUtils {
      * @throws Exception
      */
 
-    public void createBeanFiles(String entityName, JVP daoJVP) {
-        initVMParameters(entityName, daoJVP);
+    public void createBeanFiles(String entityName, GeneratedFileInfo daoGeneratedFileInfo) {
+        initVMParameters(entityName, daoGeneratedFileInfo);
 
-        createDsFiles(entityName, daoJVP);
+        createDsFiles(entityName, daoGeneratedFileInfo);
     }
 
-    private void initVMParameters(String entityName, JVP JVP) {
+    private void initVMParameters(String entityName, GeneratedFileInfo GeneratedFileInfo) {
         bean.setLowerName(getLowercaseChar(entityName));
-        devInfo.setAuthorName(ConfigData.AUTHOR_NAME.getValue());
-        devInfo.setAuthorMail(ConfigData.AUTHOR_MAIL.getValue());
+        developerInfo.setAuthorName(ConfigData.AUTHOR_NAME.getValue());
+        developerInfo.setAuthorMail(ConfigData.AUTHOR_MAIL.getValue());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(ConfigData.DATE_FORMAT.getValue());
-        devInfo.setDate(simpleDateFormat.format(new Date()));
-        devInfo.setVersion(ConfigData.VERSION.getValue());
+        developerInfo.setDate(simpleDateFormat.format(new Date()));
+        developerInfo.setVersion(ConfigData.VERSION.getValue());
         bean.setName(entityName);
 
         //处理路径, 把文件放到指定位置
-        String absPath = PathInfo.getFileAbsPath(JVP.getJavaFilePath(), JVP.getJavaSuffix());
+        String absPath = PathInfo.getFileAbsPath(GeneratedFileInfo.getJavaFilePath(), GeneratedFileInfo.getJavaSuffix());
         String packagePath = PathInfo.toJavaPackage(absPath);
 
 
@@ -63,20 +69,20 @@ public class GeneratorJavaFileUtils {
 
     }
 
-    private void createDsFiles(String entityName, JVP JVP) {
-        String vmName = JVP.getVmName();
-        String fileSuffix = JVP.getJavaSuffix();
-        doCreateFiles(entityName, fileSuffix, vmName, JVP);
+    private void createDsFiles(String entityName, GeneratedFileInfo GeneratedFileInfo) {
+        String vmName = GeneratedFileInfo.getVmName();
+        String fileSuffix = GeneratedFileInfo.getJavaSuffix();
+        doCreateFiles(entityName, fileSuffix, vmName, GeneratedFileInfo);
     }
 
 
-    private void doCreateFiles(String entityName, String packagePath, String vmName, JVP jvp) {
+    private void doCreateFiles(String entityName, String packagePath, String vmName, GeneratedFileInfo generatedFileInfo) {
 
 
         //
         try {
 
-            String absPath = PathInfo.getFileAbsPath(jvp.getJavaFilePath(), jvp.getJavaSuffix());
+            String absPath = PathInfo.getFileAbsPath(generatedFileInfo.getJavaFilePath(), generatedFileInfo.getJavaSuffix());
 
             File filePath = new File(absPath);
             //创建目录
@@ -86,7 +92,7 @@ public class GeneratorJavaFileUtils {
             File file = new File(fileName);
             FileWriter fw = new FileWriter(file);
 
-            String GeneratedCodeFile = createCodeByVelocity(vmName, bean, devInfo,jvp.getModelInfoMap());
+            String GeneratedCodeFile = createCodeByVelocity(vmName, bean, developerInfo, generatedFileInfo.getModelInfoMap());
             fw.write(GeneratedCodeFile);
             fw.flush();
             fw.close();
@@ -103,12 +109,12 @@ public class GeneratorJavaFileUtils {
      *
      * @param fileVMPath 模板路径
      * @param bean       目标bean
-     * @param devInfo 注释
+     * @param developerInfo 注释
      * @param map
      * @return
      * @throws Exception
      */
-    private String createCodeByVelocity(String fileVMPath, Bean bean, DevInfo devInfo, Map<String, Object> map) throws Exception {
+    private String createCodeByVelocity(String fileVMPath, Bean bean, DeveloperInfo developerInfo, Map<String, Object> map) throws Exception {
 
         VelocityEngine velocityEngine = new VelocityEngine();
         velocityEngine.setProperty("input.encoding", "UTF-8");
@@ -121,7 +127,7 @@ public class GeneratorJavaFileUtils {
         Template template = velocityEngine.getTemplate(fileVMPath);
         VelocityContext velocityContext = new VelocityContext();
         velocityContext.put("bean", bean);
-        velocityContext.put("devInfo", devInfo);
+        velocityContext.put("developerInfo", developerInfo);
 
         velocityContext.put("map", map);
         Map<String, Object> newMap = new HashMap<>();

@@ -1,4 +1,4 @@
-package com.gen.demo;
+package com.gen.err.bug.test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,7 +12,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author fanhb on 2018/9/21

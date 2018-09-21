@@ -3,11 +3,11 @@ package ${bean.beanDaoUrl};
 
 
 /**
-* @author $!{devInfo.authorName}
-* @email $!{devInfo.authorMail}>
-* @date $!{devInfo.date}
+* @author $!{developerInfo.authorName}
+* @email $!{developerInfo.authorMail}>
+* @date $!{developerInfo.date}
 *
-* @version $!{devInfo.version}
+* @version $!{developerInfo.version}
 */
 public class $!{bean.name}ServiceImpl implements $!{bean.name}Service{
 
