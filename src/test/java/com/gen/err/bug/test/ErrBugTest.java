@@ -2,6 +2,8 @@ package com.gen.err.bug.test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gen.core.GeneratorJavaFileUtils;
+import com.gen.demo.InitGeneratedFileInfo;
 import com.gen.mapper.TableInfo;
 import com.gen.service.ErrBugTogetherService;
 import org.junit.Test;
@@ -34,6 +36,11 @@ public class ErrBugTest {
         String tabName = "keyvalue_job";
         String dbName = "axiom";
         List<TableInfo> columnInfo = errBugTogetherService.getColumnInfo(tabName, dbName);
+
+        GeneratorJavaFileUtils generatorJavaFileUtils = new GeneratorJavaFileUtils(columnInfo);
+        InitGeneratedFileInfo.initGeneratedFileInfo(generatorJavaFileUtils, "User");
+
+
         String json = new ObjectMapper().writeValueAsString(columnInfo);
         System.err.println(json);
 

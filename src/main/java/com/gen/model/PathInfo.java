@@ -1,8 +1,8 @@
 package com.gen.model;
 
+import com.gen.GeneratorApplication;
 import com.gen.core.GeneratorJavaFileUtils;
 import com.gen.demo.ConfigData;
-import com.gen.demo.Main;
 import com.gen.demo.assist.PathConstant;
 
 
@@ -21,9 +21,9 @@ public class PathInfo {
     //获取项目根绝对路径
     private static String absPath = System.getProperty("user.dir");
     //获取运行时绝对路径
-    private static String classFileAbsPath = PathInfo.class.getResource("/").getPath();
+    private static String classFileAbsPath = GeneratorApplication.class.getResource("/").getPath();
     // 运行时当前包路径 com.google.generator
-    private static String packagePath = Main.class.getPackage().getName();// com.google.generator
+    private static String packagePath = GeneratorApplication.class.getPackage().getName();// com.google.generator
     // com/google/generator
     private static String packagePath_ = packagePath.replaceAll("\\.", "/");
 

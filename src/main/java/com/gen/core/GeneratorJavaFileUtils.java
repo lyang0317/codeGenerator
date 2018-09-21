@@ -3,6 +3,7 @@ package com.gen.core;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gen.demo.ConfigData;
+import com.gen.mapper.TableInfo;
 import com.gen.model.Bean;
 import com.gen.model.DeveloperInfo;
 import com.gen.model.GeneratedFileInfo;
@@ -36,7 +37,12 @@ public class GeneratorJavaFileUtils {
     public static String PROJECT_TEST_PATH = ConfigData.PROJECT_TEST_PATH.getValue();//SpringBoot
 
     private static Bean bean = new Bean();
+    private List<TableInfo> dataList;
     private static DeveloperInfo developerInfo = new DeveloperInfo();
+
+    public GeneratorJavaFileUtils(List<TableInfo> dataList) {
+        this.dataList = dataList;
+    }
 
     /**
      * 创建bean的Service的实现<br>
@@ -92,7 +98,7 @@ public class GeneratorJavaFileUtils {
             File file = new File(fileName);
             FileWriter fw = new FileWriter(file);
 
-            String GeneratedCodeFile = createCodeByVelocity(vmName, bean, developerInfo, generatedFileInfo.getModelInfoMap());
+            String GeneratedCodeFile = createCodeByVelocity(vmName, bean, developerInfo);
             fw.write(GeneratedCodeFile);
             fw.flush();
             fw.close();
@@ -110,11 +116,10 @@ public class GeneratorJavaFileUtils {
      * @param fileVMPath 模板路径
      * @param bean       目标bean
      * @param developerInfo 注释
-     * @param map
      * @return
      * @throws Exception
      */
-    private String createCodeByVelocity(String fileVMPath, Bean bean, DeveloperInfo developerInfo, Map<String, Object> map) throws Exception {
+    private String createCodeByVelocity(String fileVMPath, Bean bean, DeveloperInfo developerInfo) throws Exception {
 
         VelocityEngine velocityEngine = new VelocityEngine();
         velocityEngine.setProperty("input.encoding", "UTF-8");
@@ -129,13 +134,19 @@ public class GeneratorJavaFileUtils {
         velocityContext.put("bean", bean);
         velocityContext.put("developerInfo", developerInfo);
 
-        velocityContext.put("map", map);
+//        velocityContext.put("map", map);
+
+        //生成文件需要的主要数据
+        velocityContext.put("dataList", dataList);
         Map<String, Object> newMap = new HashMap<>();
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
-//            entry.getKey()
-            String GSetter = FieldUtils.lineToHumpGSetter(entry.getKey());
-            newMap.put(GSetter,entry.getKey());
+        for (TableInfo tableInfo : dataList) {
+
+
+            String colName = tableInfo.getColumnName();
+            String GSetter = FieldUtils.lineToHumpGSetter(colName);
+            newMap.put(GSetter,colName);
         }
+        //生成getter,setter的驼峰数据
         velocityContext.put("GSetter", newMap);
 //        System.out.println(fields);
 
