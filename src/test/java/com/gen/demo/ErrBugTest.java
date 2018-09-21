@@ -22,6 +22,11 @@ import java.util.Map;
 public class ErrBugTest {
     @Autowired
     private ErrBugTogetherService errBugTogetherService;
+
+    /**
+     * 测试从数据库获取表的描述数据
+     * @throws JsonProcessingException
+     */
     @Test
     public void getAllTest() throws JsonProcessingException {
         List<Map<String, Object>> columnInfo = errBugTogetherService.getColumnInfo();
