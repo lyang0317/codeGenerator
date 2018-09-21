@@ -3,7 +3,6 @@ package com.gen.model;
 import com.gen.GeneratorApplication;
 import com.gen.core.GeneratorJavaFileUtils;
 import com.gen.demo.ConfigData;
-import com.gen.demo.assist.PathConstant;
 
 
 /**
@@ -45,10 +44,6 @@ public class PathInfo {
         System.out.println("\t\t\t#################################################");
         System.out.println("\t\t\t#################################################");
 
-        cacheMap.put(PathConstant.CLASS_RUNTIME_ABS_PATH, classFileAbsPath)
-                .put(PathConstant.PROJECT_ABS_PATH, absPath)
-                .put(PathConstant.PACKAGE_PATH, packagePath)
-                .put(PathConstant.PACKAGE_PATH_, packagePath_);
     }
 
 

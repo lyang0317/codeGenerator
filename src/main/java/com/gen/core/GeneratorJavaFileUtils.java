@@ -3,7 +3,7 @@ package com.gen.core;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gen.demo.ConfigData;
-import com.gen.mapper.TableInfo;
+import com.gen.model.TableInfo;
 import com.gen.model.Bean;
 import com.gen.model.DeveloperInfo;
 import com.gen.model.GeneratedFileInfo;

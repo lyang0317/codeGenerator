@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gen.core.GeneratorJavaFileUtils;
 import com.gen.demo.InitGeneratedFileInfo;
-import com.gen.mapper.TableInfo;
+import com.gen.model.TableInfo;
 import com.gen.service.ErrBugTogetherService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

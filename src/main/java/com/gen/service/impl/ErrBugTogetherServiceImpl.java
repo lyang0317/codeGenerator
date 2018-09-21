@@ -1,7 +1,7 @@
 package com.gen.service.impl;
 
 import com.gen.mapper.ErrBugTogetherMapper;
-import com.gen.mapper.TableInfo;
+import com.gen.model.TableInfo;
 import com.gen.model.ErrBugTogetherEntity;
 import com.gen.service.ErrBugTogetherService;
 import com.github.pagehelper.PageInfo;

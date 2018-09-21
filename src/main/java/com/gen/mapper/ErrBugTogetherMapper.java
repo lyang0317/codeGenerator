@@ -1,11 +1,11 @@
 package com.gen.mapper;
 
 import com.gen.model.ErrBugTogetherEntity;
+import com.gen.model.TableInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 问题表Dao

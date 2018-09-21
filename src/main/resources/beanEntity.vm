@@ -11,21 +11,21 @@ package ${bean.beanDaoUrl};
 */
 public class $!{bean.name}Entity {
 
-    #foreach($key in $map.keySet() )
-        //$map.get($key)
-        private String $key;
-    #end
-    #foreach($getter in $GSetter.keySet() )
-        #set( $fieldName = $GSetter.get($getter) )
+#foreach($data in $dataList )
+    /** $!{data.columnComment} */
+    private String $!{data.colNameHump};
+#end
 
-        public void set$getter(String $fieldName){
-            this.$fieldName=$fieldName;
-        }
+#foreach($data in $dataList )
 
-        public String get$getter(){
-            return this.$fieldName;
-        }
-    #end
+    public void set$!{data.gsetter}(String $!{data.colNameHump}){
+        this.$!{data.colNameHump}=$!{data.colNameHump};
+    }
+
+    public String get$!{data.gsetter}(){
+        return this.$!{data.colNameHump};
+    }
+#end
 
 
 }

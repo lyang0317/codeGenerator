@@ -371,7 +371,7 @@
 
 
     <!--根据类型查询-->
-    <select id="getColumnInfo" resultType="com.gen.mapper.TableInfo" parameterType="string">
+    <select id="getColumnInfo" resultType="com.gen.model.TableInfo" parameterType="string">
 
         SELECT
           column_name     AS    columnName      ,
