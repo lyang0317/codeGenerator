@@ -30,7 +30,9 @@ public class ErrBugTest {
      */
     @Test
     public void getAllTest() throws JsonProcessingException {
-        List<TableInfo> columnInfo = errBugTogetherService.getColumnInfo();
+        String tabName = "keyvalue_job";
+        String dbName = "axiom";
+        List<TableInfo> columnInfo = errBugTogetherService.getColumnInfo(tabName, dbName);
         String json = new ObjectMapper().writeValueAsString(columnInfo);
         System.out.println(json);
 

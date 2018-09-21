@@ -35,5 +35,5 @@ public interface ErrBugTogetherMapper {
     ErrBugTogetherEntity getErrBugTogetherById(@Param("id") int id);
 
     List<ErrBugTogetherEntity> findErrBug(@Param("find") String find, @Param("type") String type);
-    List<TableInfo> getColumnInfo();
+    List<TableInfo> getColumnInfo(@Param("tabName") String tabName, @Param("dbName") String dbName);
 }

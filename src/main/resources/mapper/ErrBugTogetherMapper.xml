@@ -371,7 +371,7 @@
 
 
     <!--根据类型查询-->
-    <select id="getColumnInfo" resultType="com.gen.mapper.TableInfo">
+    <select id="getColumnInfo" resultType="com.gen.mapper.TableInfo" parameterType="string">
 
         SELECT
           column_name     AS    columnName      ,
@@ -380,7 +380,7 @@
 
         FROM information_schema.columns
 
-        WHERE table_name='keyvalue_job' and table_schema='axiom'
+        WHERE table_name=#{tabName} and table_schema='axiom'
 
     </select>
 

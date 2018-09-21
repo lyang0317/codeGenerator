@@ -5,7 +5,6 @@ import com.gen.model.ErrBugTogetherEntity;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author fanhb on 2018/8/18
@@ -53,5 +52,5 @@ public interface ErrBugTogetherService {
 
     List<String> findByKeyName(String keyName);
 
-    List<TableInfo> getColumnInfo();
+    List<TableInfo> getColumnInfo(String tabName, String dbName);
 }

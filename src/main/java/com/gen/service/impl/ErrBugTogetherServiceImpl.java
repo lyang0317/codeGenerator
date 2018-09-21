@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author fanhb on 2018/8/18
@@ -36,8 +35,8 @@ public class ErrBugTogetherServiceImpl implements ErrBugTogetherService {
     }
 
     @Override
-    public List<TableInfo > getColumnInfo() {
-        return errBugTogetherMapper.getColumnInfo();
+    public List<TableInfo > getColumnInfo(String tabName, String dbName) {
+        return errBugTogetherMapper.getColumnInfo(tabName,dbName);
     }
 
     @Override
