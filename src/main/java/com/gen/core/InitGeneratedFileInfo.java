@@ -1,6 +1,5 @@
-package com.gen.demo;
+package com.gen.core;
 
-import com.gen.core.GeneratorJavaFileUtils;
 import com.gen.model.GeneratedFileInfo;
 
 import java.util.ArrayList;

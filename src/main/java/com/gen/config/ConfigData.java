@@ -1,4 +1,4 @@
-package com.gen.demo;
+package com.gen.config;
 
 
 
@@ -13,8 +13,8 @@ package com.gen.demo;
 public enum ConfigData {
 
     /**
-     * @code /Users/van/wiser/generator/${DEF_PROJECT_PATH}/com/gen/demo/dao/impl/UserDaoImpl.java 等效于下面这个路径
-     * @eg /Users/van/wiser/generator/src/main/java/com/gen/demo/dao/impl/UserDaoImpl.java
+     * @code /Users/van/wiser/generator/${DEF_PROJECT_PATH}/com/gen/config/dao/impl/UserDaoImpl.java 等效于下面这个路径
+     * @eg /Users/van/wiser/generator/src/main/java/com/gen/config/dao/impl/UserDaoImpl.java
      * @desc 该demo适用于maven结构的项目, 非maven项目需要修改这个路径参数
      * @eg : SpringBoot
      *

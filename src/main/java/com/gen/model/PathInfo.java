@@ -2,7 +2,7 @@ package com.gen.model;
 
 import com.gen.GeneratorApplication;
 import com.gen.core.GeneratorJavaFileUtils;
-import com.gen.demo.ConfigData;
+import com.gen.config.ConfigData;
 
 
 /**

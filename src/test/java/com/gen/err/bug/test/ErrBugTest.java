@@ -3,7 +3,7 @@ package com.gen.err.bug.test;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gen.core.GeneratorJavaFileUtils;
-import com.gen.demo.InitGeneratedFileInfo;
+import com.gen.core.InitGeneratedFileInfo;
 import com.gen.model.TableInfo;
 import com.gen.service.ErrBugTogetherService;
 import org.junit.Test;

@@ -14,9 +14,9 @@ public class TableInfo {
     //字段名称
     private String columnName;
     private String colNameHump ;//驼峰
-    private String gsetter; //驼峰切首字母大写
+    private String gsetter; //驼峰且首字母大写
     //字段注释
-    private String columnComment; 
+    private String columnComment;
     //数据类型,JDBC TYPE
     private String dataType;
 
