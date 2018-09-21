@@ -2,6 +2,7 @@ package com.gen.demo;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gen.mapper.TableInfo;
 import com.gen.service.ErrBugTogetherService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +30,7 @@ public class ErrBugTest {
      */
     @Test
     public void getAllTest() throws JsonProcessingException {
-        List<Map<String, Object>> columnInfo = errBugTogetherService.getColumnInfo();
+        List<TableInfo> columnInfo = errBugTogetherService.getColumnInfo();
         String json = new ObjectMapper().writeValueAsString(columnInfo);
         System.out.println(json);
 

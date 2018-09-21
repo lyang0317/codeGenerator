@@ -1,5 +1,6 @@
 package com.gen.service;
 
+import com.gen.mapper.TableInfo;
 import com.gen.model.ErrBugTogetherEntity;
 import com.github.pagehelper.PageInfo;
 
@@ -52,5 +53,5 @@ public interface ErrBugTogetherService {
 
     List<String> findByKeyName(String keyName);
 
-    List<Map<String,Object>> getColumnInfo();
+    List<TableInfo> getColumnInfo();
 }

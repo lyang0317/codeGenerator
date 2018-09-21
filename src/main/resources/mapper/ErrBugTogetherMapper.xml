@@ -371,13 +371,16 @@
 
 
     <!--根据类型查询-->
-    <select id="getColumnInfo" resultType="map">
+    <select id="getColumnInfo" resultType="com.gen.mapper.TableInfo">
 
-        select column_name,column_comment,data_type
+        SELECT
+          column_name     AS    columnName      ,
+          column_comment  AS    columnComment   ,
+          data_type       AS    dataType
 
-        from information_schema.columns
+        FROM information_schema.columns
 
-        where table_name='keyvalue_job' and table_schema='axiom'
+        WHERE table_name='keyvalue_job' and table_schema='axiom'
 
     </select>
 
