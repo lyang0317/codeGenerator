@@ -55,8 +55,10 @@ public class Main {
 
     public void beanTool(GeneratorJavaFileUtils generatorJavaFileUtils, String targetEntity) throws Exception {
 
-        MODEL.setModelInfoMap("name","名称");
-        MODEL.setModelInfoMap("age","年龄");
+        MODEL.setModelInfoMap("column_name","字段名称");
+        MODEL.setModelInfoMap("column_comment","字段注释");
+        MODEL.setModelInfoMap("data_type","数据类型");
+
 
 
         generatorJavaFileUtils.createBeanFiles(targetEntity, Main.DAO);
