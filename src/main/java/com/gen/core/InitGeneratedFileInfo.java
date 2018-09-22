@@ -56,13 +56,13 @@ public class InitGeneratedFileInfo {
 
     public static void initGeneratedFileInfo(GeneratorJavaFileUtils generatorJavaFileUtils, String targetEntity) {
 
-        for (GeneratedFileInfo generatedFileInfo : fileInfoList) {
-            String[] split = StringUtils.split(generatedFileInfo.getJavaSuffix(), ".");
-            String entityName = targetEntity + split[0];
-            generatedFileInfo.setEntityName(entityName);
-            generatedFileInfo.setDesc("desc");
-            generatedFileInfo.setJavaFilePath("/genFile/");
-            generatorJavaFileUtils.createBeanFiles(targetEntity, generatedFileInfo);
+        String[] split = StringUtils.split(MODEL.getJavaSuffix(), ".");
+        String entityName = targetEntity + split[0];
+        for (GeneratedFileInfo gfi : fileInfoList) {
+            gfi.setDesc("desc");
+            gfi.setJavaFilePath("/genFile/");
+            gfi.setEntityName(entityName);
+            generatorJavaFileUtils.createBeanFiles(targetEntity, gfi);
         }
     }
 

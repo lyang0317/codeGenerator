@@ -362,12 +362,11 @@
 
 
     <!--根据类型查询-->
-    <select id="get${fileInfo.beanDaoUrl}List" resultType="com.gen.model.TableInfo" parameterType="string">
+    <select id="get${gfi.entityName}List" resultType="${gfi.pkgPathEntityName}" >
+
         SELECT
-
             <include refid="base_column"/>
-
-        FROM ${fileInfo.beanDaoUrl} tab
+        FROM ${fileInfo.tabName} tab
 
     </select>
 

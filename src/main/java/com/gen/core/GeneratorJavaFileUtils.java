@@ -3,6 +3,7 @@ package com.gen.core;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gen.config.ConfigData;
 import com.gen.model.*;
+import com.gen.util.FieldUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -46,14 +47,14 @@ public class GeneratorJavaFileUtils {
      * @throws Exception
      */
 
-    public void createBeanFiles(String entityName, GeneratedFileInfo daoGeneratedFileInfo) {
-        initVMParameters(entityName, daoGeneratedFileInfo);
+    public void createBeanFiles(String entityName, GeneratedFileInfo gfi) {
+        initVMParameters(entityName, gfi);
 
-        doCreateFiles(entityName, daoGeneratedFileInfo);
+        doCreateFiles(entityName, gfi);
     }
 
-    private void initVMParameters(String entityName, GeneratedFileInfo GeneratedFileInfo) {
-        fileInfo.setLowerName(getLowercaseChar(entityName));
+    private void initVMParameters(String entityName, GeneratedFileInfo gfi) {
+        fileInfo.setLowerName(FieldUtils.triggerFirstLetterLower(entityName));
         developerInfo.setAuthorName(ConfigData.AUTHOR_NAME.getValue());
         developerInfo.setAuthorMail(ConfigData.AUTHOR_MAIL.getValue());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(ConfigData.DATE_FORMAT.getValue());
@@ -63,12 +64,26 @@ public class GeneratorJavaFileUtils {
         fileInfo.setTabName(tabName);
 
         //处理路径, 把文件放到指定位置
-        String absPath = PathInfo.getFileAbsPath(GeneratedFileInfo.getJavaFilePath(), GeneratedFileInfo.getJavaSuffix());
+        String absPath = PathInfo.getFileAbsPath(gfi.getJavaFilePath(), gfi.getJavaSuffix());
         String packagePath = PathInfo.toJavaPackage(absPath);
-
-
         fileInfo.setBeanDaoUrl(packagePath);
 
+
+        for (TableInfo tableInfo : dataList) {
+            tableInfo.setTabName(tabName);
+        }
+
+        /** 处理最后一个逗号 */
+        TableInfo tableInfo = dataList.get(dataList.size() - 1);
+        tableInfo.setColNameHumpQuotaComma30(tableInfo.getColNameHumpQuota30());
+        tableInfo.setColNameSymbolHumpComma30(tableInfo.getColNameSymbolHump30());
+        tableInfo.setColumnNameComma30(tableInfo.getColumnName30());
+        tableInfo.setColumnNameQuotaComma30(tableInfo.getColumnNameQuota30());
+
+        //获取实体类的全路径, eg: com.gen.model.DeveloperInfo, 作为xml的resultType
+        String pkgPath = PathInfo.packagePath + gfi.getJavaFilePath() + gfi.getEntityName();
+        pkgPath = pkgPath.replaceAll("/",".");
+        gfi.setPkgPathEntityName(pkgPath);
 
     }
 
@@ -85,10 +100,8 @@ public class GeneratorJavaFileUtils {
             File file = new File(fileName);
             FileWriter fw = new FileWriter(file);
 
-            String pkgPath = PathInfo.packagePath + gfi.getJavaFilePath() + gfi.getEntityName();
-            pkgPath = pkgPath.replaceAll("/",".");
-            gfi.setPkgPathEntityName(pkgPath);
-            String GeneratedCodeFile = createCodeByVelocity(gfi.getVmName(), fileInfo, developerInfo);
+
+            String GeneratedCodeFile = doPutDataIntoVelocityEngineCreateFiles(gfi, fileInfo, developerInfo);
             fw.write(GeneratedCodeFile);
             fw.flush();
             fw.close();
@@ -103,13 +116,13 @@ public class GeneratorJavaFileUtils {
     /**
      * 根据模板生成代码
      *
-     * @param vmName 模板路径
+     * @param gfi 模板信息
      * @param fileInfo       目标bean
      * @param developerInfo 注释
      * @return
      * @throws Exception
      */
-    private String createCodeByVelocity(String vmName, FileInfo fileInfo, DeveloperInfo developerInfo) throws Exception {
+    private String doPutDataIntoVelocityEngineCreateFiles(GeneratedFileInfo gfi, FileInfo fileInfo, DeveloperInfo developerInfo) throws Exception {
 
         VelocityEngine velocityEngine = new VelocityEngine();
         velocityEngine.setProperty("input.encoding", "UTF-8");
@@ -119,22 +132,13 @@ public class GeneratorJavaFileUtils {
             velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
         }
         velocityEngine.init();
-        Template template = velocityEngine.getTemplate(vmName);
+        Template template = velocityEngine.getTemplate(gfi.getVmName());
         VelocityContext velocityContext = new VelocityContext();
         velocityContext.put("fileInfo", fileInfo);
         velocityContext.put("developerInfo", developerInfo);
+        velocityContext.put("gfi", gfi);
 
 
-        for (TableInfo tableInfo : dataList) {
-            tableInfo.setTabName(tabName);
-        }
-
-        /** 处理最后一个逗号 */
-        TableInfo tableInfo = dataList.get(dataList.size() - 1);
-        tableInfo.setColNameHumpQuotaComma30(tableInfo.getColNameHumpQuota30());
-        tableInfo.setColNameSymbolHumpComma30(tableInfo.getColNameSymbolHump30());
-        tableInfo.setColumnNameComma30(tableInfo.getColumnName30());
-        tableInfo.setColumnNameQuotaComma30(tableInfo.getColumnNameQuota30());
 //        velocityContext.put("map", map);
 
         //生成文件需要的主要数据
@@ -160,18 +164,6 @@ public class GeneratorJavaFileUtils {
         }
     }
 
-    /**
-     * 把第一个字母变为小写<br>
-     * 如：<br>
-     * <code>str = "UserDao";</code><br>
-     * <code>return "userDao";</code>
-     *
-     * @param str
-     * @return
-     */
-    private String getLowercaseChar(String str) {
-        return str.substring(0, 1).toLowerCase() + str.substring(1);
-    }
 
     /**
      * 显示信息
@@ -182,15 +174,6 @@ public class GeneratorJavaFileUtils {
         System.out.println("创建文件：" + info + "成功！");
     }
 
-    /**
-     * 获取系统时间
-     *
-     * @return
-     */
-    private static String getDate() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(ConfigData.DATE_FORMAT.getValue());
-        return simpleDateFormat.format(new Date());
-    }
 
 
 }

@@ -26,26 +26,28 @@ public class FieldUtils {
         matcher.appendTail(sb);
     }
 
+    /** 首字母大写的驼峰 */
     public static String lineToHumpGSetter(String str) {
-
-//        Matcher firstMatcher = firstPattern.matcher(str);
         StringBuffer sb = new StringBuffer();
         StringBuffer sb2 = new StringBuffer();
-//        str = str.toLowerCase();
-//        firstMatcher.find();
-//        firstMatcher.appendReplacement(sb, firstMatcher.group(1).toUpperCase());
         Matcher m = Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(str);
-
         while (m.find()) {
             m.appendReplacement(sb2, m.group(1).toUpperCase() + m.group(2).toLowerCase());
         }
         lineToHump(sb2.toString(), sb);
         return sb.toString();
     }
+    /** 首字母大写的驼峰 */
+    public static String triggerFirstLetterLower(String str) {
+        StringBuffer sbuf = new StringBuffer();
+        Matcher m = Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(str);
+        while (m.find()) {
+            m.appendReplacement(sbuf, m.group(1).toLowerCase() + m.group(2).toLowerCase());
+        }
+        return sbuf.toString();
+    }
 
-    /**
-     * 驼峰转下划线(简单写法，效率低于{@link #humpToLine2(String)})
-     */
+    /** 驼峰转下划线(简单写法，效率低于{@link #humpToLine2(String)}) */
     public static String humpToLine(String str) {
         return str.replaceAll("[A-Z]", "_$0").toLowerCase();
     }
