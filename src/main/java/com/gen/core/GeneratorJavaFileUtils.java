@@ -54,6 +54,7 @@ public class GeneratorJavaFileUtils {
         doCreateFiles(entityName, gfi);
     }
 
+    /** 主要处理xml文件中的格式和逗号,#号 */
     private void initVMParameters(String entityName, GeneratedFileInfo gfi) {
         fileInfo.setLowerName(FieldUtils.triggerFirstLetterLower(entityName));
         developerInfo.setAuthorName(ConfigData.AUTHOR_NAME.getValue());
