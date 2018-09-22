@@ -3,6 +3,7 @@ package com.gen.model;
 
 import com.gen.util.FieldUtils;
 import com.gen.util.StringFormatUtil;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -53,7 +54,7 @@ public class TableInfo {
     }
 
     public String getDataType() {
-        return dataType;
+        return ObjectUtils.toString(dataType).toUpperCase();
     }
 
     public String getColNameHump() {
@@ -149,7 +150,8 @@ public class TableInfo {
     }
 
     public String getDataTypeQuota30() {
-        return StringFormatUtil.getQuotaFormat30(dataType);
+        String upperCase = ObjectUtils.toString(dataType).toUpperCase();
+        return StringFormatUtil.getQuotaFormat30(upperCase);
     }
 
     public void setDataTypeQuota30(String dataTypeQuota30) {

@@ -380,7 +380,9 @@
 
         FROM information_schema.columns
 
-        WHERE table_name=#{tabName} and table_schema=#{dbName}
+        WHERE
+            table_name=#{tabName}
+        AND table_schema=#{dbName}
 
     </select>
 
