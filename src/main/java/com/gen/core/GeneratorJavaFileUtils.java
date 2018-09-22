@@ -103,8 +103,7 @@ public class GeneratorJavaFileUtils {
             String fileName = absPath + entityName + gfi.getJavaSuffix();
             File file = new File(fileName);
             FileWriter fw = new FileWriter(file);
-
-
+            
             String GeneratedCodeFile = doPutDataIntoVelocityEngineCreateFiles(gfi, fileInfo, developerInfo);
             fw.write(GeneratedCodeFile);
             fw.flush();
@@ -112,7 +111,7 @@ public class GeneratorJavaFileUtils {
             showInfo(fileName);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("failed to create java files");
         }
     }
 
