@@ -1,6 +1,6 @@
 # velocity代码生成器
 ```
-1: 基于velocity,SprongBoot的代码生成器 , 连接mysql, 通过数据库表生成实体类和注释
+1: 基于velocity,SprongBoot的代码生成器 , 连接mysql, 通过数据库表生成实体类和注释,xml文件等
 2: 易拓展
 3: 后期添加各种java代码最佳实践代码生成
 ```
