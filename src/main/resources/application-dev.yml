@@ -2,11 +2,6 @@ spring:
     jackson:
       date-format: yyyy-MM-dd HH:mm:ss
       time-zone: GMT+8
-#    mvc:
-#      view:
-#        prefix: /WEB-INF/jsp/
-#        suffix: .jsp
-
     datasource:
         name: mysql_test
         type: com.alibaba.druid.pool.DruidDataSource
@@ -53,8 +48,6 @@ spring:
             max-request-size: 100Mb
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
-  type-aliases-package: cn.luischen.model
-
 
 #pagehelper
 pagehelper:
