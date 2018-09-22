@@ -54,12 +54,12 @@ public class InitGeneratedFileInfo {
         fileInfoList.add(XML);
     }
 
-    public static void initGeneratedFileInfo(GeneratorJavaFileUtils generatorJavaFileUtils, String targetEntity) {
+    public static void initGeneratedFileInfo(GeneratorJavaFileUtils generatorJavaFileUtils, String targetEntity,String desc) {
 
         String[] split = StringUtils.split(MODEL.getJavaSuffix(), ".");
         String entityName = targetEntity + split[0];
         for (GeneratedFileInfo gfi : fileInfoList) {
-            gfi.setDesc("desc");
+            gfi.setDesc(desc);
             gfi.setJavaFilePath("/genFile/");
             gfi.setEntityName(entityName);
             generatorJavaFileUtils.createBeanFiles(targetEntity, gfi);

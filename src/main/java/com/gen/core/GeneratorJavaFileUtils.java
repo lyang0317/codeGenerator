@@ -3,6 +3,7 @@ package com.gen.core;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gen.config.ConfigData;
 import com.gen.model.*;
+import com.gen.type.TypeMapping;
 import com.gen.util.FieldUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -14,8 +15,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -33,6 +33,7 @@ public class GeneratorJavaFileUtils {
 
     private static FileInfo fileInfo = new FileInfo();
     private List<TableInfo> dataList;
+    private Set<TypeMapping> importSet =  new HashSet<>();
     private String tabName;
     private static DeveloperInfo developerInfo = new DeveloperInfo();
     public static String tableInfoJson;
@@ -71,7 +72,9 @@ public class GeneratorJavaFileUtils {
 
         for (TableInfo tableInfo : dataList) {
             tableInfo.setTabName(tabName);
+            importSet.add(tableInfo.getJavaType());
         }
+
 
         /** 处理最后一个逗号 */
         TableInfo tableInfo = dataList.get(dataList.size() - 1);
@@ -134,12 +137,16 @@ public class GeneratorJavaFileUtils {
         velocityEngine.init();
         Template template = velocityEngine.getTemplate(gfi.getVmName());
         VelocityContext velocityContext = new VelocityContext();
-        velocityContext.put("fileInfo", fileInfo);
-        velocityContext.put("developerInfo", developerInfo);
-        velocityContext.put("gfi", gfi);
+        DataToVelocity.setDeveloperInfo(developerInfo);
+        DataToVelocity.setFileInfo(fileInfo);
+        DataToVelocity.setGfi(gfi);
+        DataToVelocity.setImportSet(importSet);
 
+        Map<String, Object> allDataToNgx = DataToVelocity.getAllDataToNgx();
+        for (Map.Entry<String, Object> entry : allDataToNgx.entrySet()) {
+            velocityContext.put(entry.getKey(),entry.getValue());
 
-//        velocityContext.put("map", map);
+        }
 
         //生成文件需要的主要数据
         velocityContext.put("dataList", dataList);

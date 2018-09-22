@@ -3,6 +3,7 @@
 <!-- @author $!{developerInfo.authorName} -->
 <!-- @email $!{developerInfo.authorMail}> -->
 <!-- @date $!{developerInfo.date} -->
+<!-- @desc $!{gfi.desc} -->
 <!-- @version $!{developerInfo.version} -->
 <mapper namespace="com.gen.mapper.ErrBugTogetherMapper">
     <resultMap id="BaseResultMapId" type="com.gen.model.ErrBugTogetherEntity">

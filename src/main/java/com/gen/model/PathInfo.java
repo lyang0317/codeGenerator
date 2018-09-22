@@ -14,7 +14,7 @@ import com.gen.config.ConfigData;
  *
  */
 
-public class PathInfo {
+public final class PathInfo {
 
 
     //获取项目根绝对路径

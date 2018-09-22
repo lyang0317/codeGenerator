@@ -1,6 +1,7 @@
 package com.gen.model;
 
 
+import com.gen.type.TypeMapping;
 import com.gen.util.FieldUtils;
 import com.gen.util.StringFormatUtil;
 import org.apache.commons.lang.ObjectUtils;
@@ -32,6 +33,7 @@ public class TableInfo {
     private String columnComment;
     //数据类型,JDBC TYPE
     private String dataType;
+    private TypeMapping javaType;
     private String dataTypeQuota30;
     private String tabName;
 
@@ -176,4 +178,10 @@ public class TableInfo {
     public void setTabName(String tabName) {
         this.tabName = tabName;
     }
+
+    public TypeMapping getJavaType() {
+        TypeMapping javaType = TypeMapping.getJavaType(dataType);
+        return javaType;
+    }
+
 }

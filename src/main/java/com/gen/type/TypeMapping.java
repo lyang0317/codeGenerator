@@ -57,4 +57,14 @@ public enum TypeMapping {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
+    public static TypeMapping getJavaType(String jdbcType) {
+        for (TypeMapping typeMapping : TypeMapping.values()) {
+            if (typeMapping.name().equalsIgnoreCase(jdbcType)){
+                return typeMapping;
+            }
+        }
+        return VARCHAR;
+    }
+
 }

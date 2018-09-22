@@ -1,7 +1,6 @@
 package com.gen.service;
 
 import com.gen.model.TableInfo;
-import com.gen.model.ErrBugTogetherEntity;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;

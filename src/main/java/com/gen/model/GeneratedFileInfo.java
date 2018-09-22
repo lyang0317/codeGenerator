@@ -1,8 +1,5 @@
 package com.gen.model;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 /**
  * GeneratedFileInfo: javaFile, velocity, path
  *
@@ -11,7 +8,7 @@ import java.util.Map;
  * @date 2018年06月10日12:11:34
  */
 
-public class GeneratedFileInfo {
+public final class GeneratedFileInfo {
 
 
     private String JavaSuffix;//dao/service interface suffix

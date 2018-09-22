@@ -9,7 +9,7 @@ package com.gen.model;
  * @version 1.0.0 snapshot
  *
  */
-public class DeveloperInfo {
+public final class DeveloperInfo {
 
     /**
      * 作者名称

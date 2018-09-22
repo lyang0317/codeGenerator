@@ -8,7 +8,7 @@ package com.gen.model;
  * @version 1.0.0 snapshot
  *
  */
-public class FileInfo {
+public final class FileInfo {
 
     /**
      * bean 名称

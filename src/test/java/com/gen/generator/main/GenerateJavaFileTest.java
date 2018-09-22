@@ -1,7 +1,5 @@
 package com.gen.generator.main;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gen.config.ConfigData;
 import com.gen.core.GeneratorJavaFileUtils;
 import com.gen.core.InitGeneratedFileInfo;
@@ -32,6 +30,7 @@ public class GenerateJavaFileTest {
     @Test
     public void generateJavaFileEtc() {
 
+        String desc = "java文件头的备注信息";
         String dbName = "axiom"; // 数据库名称
         String tabName = "keyvalue_job"; //表名
         ConfigData.setAuthorName("zhanSan");
@@ -41,7 +40,7 @@ public class GenerateJavaFileTest {
         List<TableInfo> columnInfo = errBugTogetherService.getColumnInfo(tabName, dbName);
 
         GeneratorJavaFileUtils generatorJavaFileUtils = new GeneratorJavaFileUtils(columnInfo,tabName);
-        InitGeneratedFileInfo.initGeneratedFileInfo(generatorJavaFileUtils, keyValueJob);
+        InitGeneratedFileInfo.initGeneratedFileInfo(generatorJavaFileUtils, keyValueJob,desc);
         /** 填充到velocity中的数据的json形式 */
         System.err.println(GeneratorJavaFileUtils.tableInfoJson);
         boolean empty = ObjectUtils.isEmpty(columnInfo);
