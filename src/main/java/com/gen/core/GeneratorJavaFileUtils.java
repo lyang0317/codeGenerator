@@ -5,6 +5,7 @@ import com.gen.config.ConfigData;
 import com.gen.model.*;
 import com.gen.type.TypeMapping;
 import com.gen.util.FieldUtils;
+import com.gen.util.StringFormatUtil;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -33,11 +34,26 @@ public class GeneratorJavaFileUtils {
 
     private static FileInfo fileInfo = new FileInfo();
     private List<TableInfo> dataList;
-    private Set<TypeMapping> importSet =  new HashSet<>();
+    private Set<TypeMapping> importSet = new HashSet<>();
     private String tabName;
     private static DeveloperInfo developerInfo = new DeveloperInfo();
     public static String tableInfoJson;
+
     public GeneratorJavaFileUtils(List<TableInfo> dataList, String tabName) {
+
+        int length = 0;
+        for (TableInfo tableInfo : dataList) {
+            int curLength = tableInfo.getColumnName().length();
+            if (curLength >= length) {
+                length = curLength + 2;
+            }
+        }
+        if (length == 0 ){
+            length = 30;
+        }
+        StringFormatUtil.format = "$-" + length + "s";
+
+
         this.dataList = dataList;
         this.tabName = tabName;
     }
@@ -54,7 +70,9 @@ public class GeneratorJavaFileUtils {
         doCreateFiles(entityName, gfi);
     }
 
-    /** 主要处理xml文件中的格式和逗号,#号 */
+    /**
+     * 主要处理xml文件中的格式和逗号,#号
+     */
     private void initVMParameters(String entityName, GeneratedFileInfo gfi) {
         fileInfo.setLowerName(FieldUtils.triggerFirstLetterLower(entityName));
         developerInfo.setAuthorName(ConfigData.AUTHOR_NAME.getValue());
@@ -86,7 +104,7 @@ public class GeneratorJavaFileUtils {
 
         //获取实体类的全路径, eg: com.gen.model.DeveloperInfo, 作为xml的resultType
         String pkgPath = PathInfo.packagePath + gfi.getJavaFilePath() + gfi.getEntityName();
-        pkgPath = pkgPath.replaceAll("/",".");
+        pkgPath = pkgPath.replaceAll("/", ".");
         gfi.setPkgPathEntityName(pkgPath);
 
     }
@@ -103,7 +121,7 @@ public class GeneratorJavaFileUtils {
             String fileName = absPath + entityName + gfi.getJavaSuffix();
             File file = new File(fileName);
             FileWriter fw = new FileWriter(file);
-            
+
             String GeneratedCodeFile = doPutDataIntoVelocityEngineCreateFiles(gfi, fileInfo, developerInfo);
             fw.write(GeneratedCodeFile);
             fw.flush();
@@ -119,8 +137,8 @@ public class GeneratorJavaFileUtils {
     /**
      * 根据模板生成代码
      *
-     * @param gfi 模板信息
-     * @param fileInfo       目标bean
+     * @param gfi           模板信息
+     * @param fileInfo      目标bean
      * @param developerInfo 注释
      * @return
      * @throws Exception
@@ -144,7 +162,7 @@ public class GeneratorJavaFileUtils {
 
         Map<String, Object> allDataToNgx = DataToVelocity.getAllDataToNgx();
         for (Map.Entry<String, Object> entry : allDataToNgx.entrySet()) {
-            velocityContext.put(entry.getKey(),entry.getValue());
+            velocityContext.put(entry.getKey(), entry.getValue());
 
         }
 
@@ -180,7 +198,6 @@ public class GeneratorJavaFileUtils {
     private void showInfo(String info) {
         System.out.println("创建文件：" + info + "成功！");
     }
-
 
 
 }

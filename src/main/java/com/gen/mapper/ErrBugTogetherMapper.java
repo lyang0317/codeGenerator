@@ -1,5 +1,6 @@
 package com.gen.mapper;
 
+import com.gen.model.ErrBugTogetherEntity;
 import com.gen.model.TableInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

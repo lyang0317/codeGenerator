@@ -6,7 +6,7 @@ package com.gen.util;
  */
 public class StringFormatUtil {
 
-    public static final String format = "%-30s";
+    public static String format = "%-30s";
 
     public static String getFormat30(String str) {
         return String.format(format, str);
