@@ -1,5 +1,5 @@
-##create bean dao,this is a interface
-package ${bean.beanDaoUrl};
+##create fileInfo dao,this is a interface
+package ${fileInfo.beanDaoUrl};
 
 
 /**
@@ -9,6 +9,6 @@ package ${bean.beanDaoUrl};
 *
 * @version $!{developerInfo.version}
 */
-public interface $!{bean.name}Service{
+public interface $!{fileInfo.name}Service{
 
 }

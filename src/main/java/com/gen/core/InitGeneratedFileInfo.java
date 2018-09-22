@@ -1,6 +1,7 @@
 package com.gen.core;
 
 import com.gen.model.GeneratedFileInfo;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class InitGeneratedFileInfo {
 
 
     private static final List<GeneratedFileInfo> fileInfoList = new ArrayList<>();
+
     static {
 
         //生成dao代码
@@ -44,7 +46,6 @@ public class InitGeneratedFileInfo {
         XML.setVmName("vm/bean.xml.vm");
 
 
-
         fileInfoList.add(DAO);
         fileInfoList.add(DAO_IMPL);
         fileInfoList.add(SERVICE);
@@ -56,17 +57,14 @@ public class InitGeneratedFileInfo {
     public static void initGeneratedFileInfo(GeneratorJavaFileUtils generatorJavaFileUtils, String targetEntity) {
 
         for (GeneratedFileInfo generatedFileInfo : fileInfoList) {
+            String[] split = StringUtils.split(generatedFileInfo.getJavaSuffix(), ".");
+            String entityName = targetEntity + split[0];
+            generatedFileInfo.setEntityName(entityName);
             generatedFileInfo.setDesc("desc");
             generatedFileInfo.setJavaFilePath("/genFile/");
             generatorJavaFileUtils.createBeanFiles(targetEntity, generatedFileInfo);
         }
     }
-
-
-
-
-
-
 
 
 }

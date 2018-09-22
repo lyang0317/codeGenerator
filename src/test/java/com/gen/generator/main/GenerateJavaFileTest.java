@@ -37,7 +37,7 @@ public class GenerateJavaFileTest {
         String dbName = "axiom";
         List<TableInfo> columnInfo = errBugTogetherService.getColumnInfo(tabName, dbName);
 
-        GeneratorJavaFileUtils generatorJavaFileUtils = new GeneratorJavaFileUtils(columnInfo);
+        GeneratorJavaFileUtils generatorJavaFileUtils = new GeneratorJavaFileUtils(columnInfo,tabName);
         InitGeneratedFileInfo.initGeneratedFileInfo(generatorJavaFileUtils, "KeyValueJob");
 
 

@@ -1,5 +1,5 @@
-##create bean dao,this is a interface
-package ${bean.beanDaoUrl};
+##create fileInfo dao,this is a interface
+package ${fileInfo.beanDaoUrl};
 
 
 /**
@@ -9,7 +9,7 @@ package ${bean.beanDaoUrl};
 *
 * @version $!{developerInfo.version}
 */
-public class $!{bean.name}Entity {
+public class $!{fileInfo.name}Entity {
 
 #foreach($data in $dataList )
     /** $!{data.columnComment} */

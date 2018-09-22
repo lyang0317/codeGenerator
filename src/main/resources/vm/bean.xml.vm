@@ -8,16 +8,17 @@
     <resultMap id="BaseResultMapId" type="com.gen.model.ErrBugTogetherEntity">
 ##        <id column="id" jdbcType="BIGINT" property="id"/>
     #foreach($data in $dataList )
-        private String $!{data.colNameHump};
-        <result column="KEY_NAME" jdbcType="VARCHAR" property="keyName"/>
+        <result column=$!{data.colNameHumpQuota30} jdbcType=$!{data.dataTypeQuota30} property=$!{data.colNameHumpQuota30}/>
     #end
 
     </resultMap>
 
     <!-- 基本列 -->
-    <sql id="Base_Column_List">
-    ID,KEY_NAME,QUESTION,TYPE,RELATED_PERSON,PRINCIPLE_CONTENT,LANGUAGE,AXOM_NAME,CALENDAR,WEB_SITE,LARGE_CONTENT,PATH,DIMENSION,AUTHOR,SITUS,STATUS,UPDATE_TIME,POSTSCRIPT,CREATE_TIME
-  </sql>
+<sql id="Base_Column_List">
+#foreach($data in $dataList )
+    $!{data.columnName30} $!{data.colNameHumpQuotaComma30}
+#end
+</sql>
 
     <!-- 单个插入 -->
     <insert id="insertErrBugTogether" parameterType="com.gen.model.ErrBugTogetherEntity" useGeneratedKeys="true"
@@ -361,16 +362,12 @@
 
 
     <!--根据类型查询-->
-    <select id="getColumnInfo" resultType="com.gen.model.TableInfo" parameterType="string">
-
+    <select id="get${fileInfo.beanDaoUrl}List" resultType="com.gen.model.TableInfo" parameterType="string">
         SELECT
-          column_name     AS    columnName      ,
-          column_comment  AS    columnComment   ,
-          data_type       AS    dataType
 
-        FROM information_schema.columns
+            <include refid="base_column"/>
 
-        WHERE table_name=#{tabName} and table_schema='axiom'
+        FROM ${fileInfo.beanDaoUrl} tab
 
     </select>
 

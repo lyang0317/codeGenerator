@@ -18,8 +18,10 @@ public class GeneratedFileInfo {
     private String javaFilePath;//dao/service interface's path
     private String vmName; //dao/service velocity file name
     private String desc; //remark
-
-    private Map<String, Object> modelInfoMap = new LinkedHashMap<>();
+    /** 实体类名称 */
+    private String entityName;
+    /** 实体全路径加名称 */
+    private String pkgPathEntityName;
 
     /**
      * @return //Dao.java
@@ -63,11 +65,19 @@ public class GeneratedFileInfo {
         this.desc = desc;
     }
 
-    public Map<String, Object> getModelInfoMap() {
-        return modelInfoMap;
+    public String getEntityName() {
+        return entityName;
     }
 
-    public void setModelInfoMap(String key, Object value) {
-        this.modelInfoMap.put(key, value);
+    public void setEntityName(String entityName) {
+        this.entityName = entityName;
+    }
+
+    public String getPkgPathEntityName() {
+        return pkgPathEntityName;
+    }
+
+    public void setPkgPathEntityName(String pkgPathEntityName) {
+        this.pkgPathEntityName = pkgPathEntityName;
     }
 }

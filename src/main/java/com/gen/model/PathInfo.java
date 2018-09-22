@@ -18,13 +18,13 @@ public class PathInfo {
 
 
     //获取项目根绝对路径
-    private static String absPath = System.getProperty("user.dir");
+    public static final String absPath = System.getProperty("user.dir");
     //获取运行时绝对路径
-    private static String classFileAbsPath = GeneratorApplication.class.getResource("/").getPath();
+    public static final String classFileAbsPath = GeneratorApplication.class.getResource("/").getPath();
     // 运行时当前包路径 com.google.generator
-    private static String packagePath = GeneratorApplication.class.getPackage().getName();// com.google.generator
+    public static final String packagePath = GeneratorApplication.class.getPackage().getName();// com.google.generator
     // com/google/generator
-    private static String packagePath_ = packagePath.replaceAll("\\.", "/");
+    public static final String packagePath_ = packagePath.replaceAll("\\.", "/");
 
     /**
      * 目前只处理maven结构: 选择绝对路径参数 /src/main/java/  OR /src/test/java/

@@ -30,12 +30,14 @@ public class GeneratorJavaFileUtils {
     public static String PROJECT_PATH = ConfigData.PROJECT_PATH.getValue();// /target/classes/
     public static String PROJECT_TEST_PATH = ConfigData.PROJECT_TEST_PATH.getValue();//SpringBoot
 
-    private static Bean bean = new Bean();
+    private static FileInfo fileInfo = new FileInfo();
     private List<TableInfo> dataList;
+    private String tabName;
     private static DeveloperInfo developerInfo = new DeveloperInfo();
     public static String tableInfoJson;
-    public GeneratorJavaFileUtils(List<TableInfo> dataList) {
+    public GeneratorJavaFileUtils(List<TableInfo> dataList, String tabName) {
         this.dataList = dataList;
+        this.tabName = tabName;
     }
 
     /**
@@ -47,52 +49,46 @@ public class GeneratorJavaFileUtils {
     public void createBeanFiles(String entityName, GeneratedFileInfo daoGeneratedFileInfo) {
         initVMParameters(entityName, daoGeneratedFileInfo);
 
-        createDsFiles(entityName, daoGeneratedFileInfo);
+        doCreateFiles(entityName, daoGeneratedFileInfo);
     }
 
     private void initVMParameters(String entityName, GeneratedFileInfo GeneratedFileInfo) {
-        bean.setLowerName(getLowercaseChar(entityName));
+        fileInfo.setLowerName(getLowercaseChar(entityName));
         developerInfo.setAuthorName(ConfigData.AUTHOR_NAME.getValue());
         developerInfo.setAuthorMail(ConfigData.AUTHOR_MAIL.getValue());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(ConfigData.DATE_FORMAT.getValue());
         developerInfo.setDate(simpleDateFormat.format(new Date()));
         developerInfo.setVersion(ConfigData.VERSION.getValue());
-        bean.setName(entityName);
+        fileInfo.setName(entityName);
+        fileInfo.setTabName(tabName);
 
         //处理路径, 把文件放到指定位置
         String absPath = PathInfo.getFileAbsPath(GeneratedFileInfo.getJavaFilePath(), GeneratedFileInfo.getJavaSuffix());
         String packagePath = PathInfo.toJavaPackage(absPath);
 
 
-        bean.setBeanDaoUrl(packagePath);
+        fileInfo.setBeanDaoUrl(packagePath);
 
 
     }
 
-    private void createDsFiles(String entityName, GeneratedFileInfo GeneratedFileInfo) {
-        String vmName = GeneratedFileInfo.getVmName();
-        String fileSuffix = GeneratedFileInfo.getJavaSuffix();
-        doCreateFiles(entityName, fileSuffix, vmName, GeneratedFileInfo);
-    }
-
-
-    private void doCreateFiles(String entityName, String packagePath, String vmName, GeneratedFileInfo generatedFileInfo) {
-
-
+    private void doCreateFiles(String entityName, GeneratedFileInfo gfi) {
         //
         try {
-
-            String absPath = PathInfo.getFileAbsPath(generatedFileInfo.getJavaFilePath(), generatedFileInfo.getJavaSuffix());
+            String absPath = PathInfo.getFileAbsPath(gfi.getJavaFilePath(), gfi.getJavaSuffix());
 
             File filePath = new File(absPath);
             //创建目录
             createFilePath(filePath);
             //创建文件
-            String fileName = absPath + entityName + packagePath;
+            String fileName = absPath + entityName + gfi.getJavaSuffix();
             File file = new File(fileName);
             FileWriter fw = new FileWriter(file);
 
-            String GeneratedCodeFile = createCodeByVelocity(vmName, bean, developerInfo);
+            String pkgPath = PathInfo.packagePath + gfi.getJavaFilePath() + gfi.getEntityName();
+            pkgPath = pkgPath.replaceAll("/",".");
+            gfi.setPkgPathEntityName(pkgPath);
+            String GeneratedCodeFile = createCodeByVelocity(gfi.getVmName(), fileInfo, developerInfo);
             fw.write(GeneratedCodeFile);
             fw.flush();
             fw.close();
@@ -107,13 +103,13 @@ public class GeneratorJavaFileUtils {
     /**
      * 根据模板生成代码
      *
-     * @param fileVMPath 模板路径
-     * @param bean       目标bean
+     * @param vmName 模板路径
+     * @param fileInfo       目标bean
      * @param developerInfo 注释
      * @return
      * @throws Exception
      */
-    private String createCodeByVelocity(String fileVMPath, Bean bean, DeveloperInfo developerInfo) throws Exception {
+    private String createCodeByVelocity(String vmName, FileInfo fileInfo, DeveloperInfo developerInfo) throws Exception {
 
         VelocityEngine velocityEngine = new VelocityEngine();
         velocityEngine.setProperty("input.encoding", "UTF-8");
@@ -123,11 +119,22 @@ public class GeneratorJavaFileUtils {
             velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
         }
         velocityEngine.init();
-        Template template = velocityEngine.getTemplate(fileVMPath);
+        Template template = velocityEngine.getTemplate(vmName);
         VelocityContext velocityContext = new VelocityContext();
-        velocityContext.put("bean", bean);
+        velocityContext.put("fileInfo", fileInfo);
         velocityContext.put("developerInfo", developerInfo);
 
+
+        for (TableInfo tableInfo : dataList) {
+            tableInfo.setTabName(tabName);
+        }
+
+        /** 处理最后一个逗号 */
+        TableInfo tableInfo = dataList.get(dataList.size() - 1);
+        tableInfo.setColNameHumpQuotaComma30(tableInfo.getColNameHumpQuota30());
+        tableInfo.setColNameSymbolHumpComma30(tableInfo.getColNameSymbolHump30());
+        tableInfo.setColumnNameComma30(tableInfo.getColumnName30());
+        tableInfo.setColumnNameQuotaComma30(tableInfo.getColumnNameQuota30());
 //        velocityContext.put("map", map);
 
         //生成文件需要的主要数据

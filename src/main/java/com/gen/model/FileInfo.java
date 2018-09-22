@@ -1,9 +1,6 @@
 package com.gen.model;
 
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  *
  * @author fanhaibo (2018年06月10日)
@@ -11,10 +8,8 @@ import java.util.Map;
  * @version 1.0.0 snapshot
  *
  */
-public class Bean {
+public class FileInfo {
 
-
-    private static final Map<String,Object> map = new HashMap<>();
     /**
      * bean 名称
      */
@@ -28,6 +23,12 @@ public class Bean {
      */
     private String beanUrl;
     private String beanDaoUrl;
+    /** 表名 */
+    private String tabName;
+
+
+
+
     public String getName() {
         return name;
     }
@@ -57,10 +58,23 @@ public class Bean {
         this.beanDaoUrl = beanDaoUrl;
     }
 
-    public Bean put(String key, Object value) {
-        map.put(key, value);
-        return this;
+    public String getLowerName() {
+        return lowerName;
     }
+
+    public void setBeanUrl(String beanUrl) {
+        this.beanUrl = beanUrl;
+    }
+
+    public String getTabName() {
+        return tabName;
+    }
+
+    public void setTabName(String tabName) {
+        this.tabName = tabName;
+    }
+
+
 }
 
 

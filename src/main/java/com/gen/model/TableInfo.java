@@ -25,11 +25,16 @@ public class TableInfo {
     private String colNameHumpQuota30;//驼峰,引号,定长
     private String colNameHumpQuotaComma30;//驼峰,引号,逗号,定长
     private String colNameSymbolHumpComma30;//#号,驼峰,逗号,定长
+    private String colNameSymbolHump30;//#号,驼峰,逗号,定长
 
     //字段注释
     private String columnComment;
     //数据类型,JDBC TYPE
     private String dataType;
+    private String dataTypeQuota30;
+    private String tabName;
+
+
 
     public String getColumnName() {
         return columnName;
@@ -141,5 +146,32 @@ public class TableInfo {
 
     public void setColumnNameComma30(String columnNameComma30) {
         this.columnNameComma30 = columnNameComma30;
+    }
+
+    public String getDataTypeQuota30() {
+        return StringFormatUtil.getQuotaFormat30(dataType);
+    }
+
+    public void setDataTypeQuota30(String dataTypeQuota30) {
+        this.dataTypeQuota30 = dataTypeQuota30;
+    }
+    public String getColNameSymbolHump30() {
+        if (StringUtils.isNotBlank(colNameSymbolHump30)) {
+            return colNameSymbolHump30;
+        }
+        String hump = FieldUtils.lineToHump(columnName);
+        return StringFormatUtil.getSymbolFormat30(hump);
+    }
+
+    public void setColNameSymbolHump30(String colNameSymbolHump30) {
+        this.colNameSymbolHump30 = colNameSymbolHump30;
+    }
+
+    public String getTabName() {
+        return tabName;
+    }
+
+    public void setTabName(String tabName) {
+        this.tabName = tabName;
     }
 }
