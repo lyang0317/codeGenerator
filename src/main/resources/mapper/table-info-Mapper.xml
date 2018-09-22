@@ -380,7 +380,7 @@
 
         FROM information_schema.columns
 
-        WHERE table_name=#{tabName} and table_schema='axiom'
+        WHERE table_name=#{tabName} and table_schema=#{dbName}
 
     </select>
 
