@@ -22,13 +22,13 @@
     --被生成代码的位置: /test/java/com.gen.generator.genFile
 ```
 
-```
-有共享和贡献代码的朋友欢迎来电:183 2872 0393
-```
-
 第四步: db2拓展
 ```
    修改/resource/mapper/table-info-Mapper.xml/getColumnInfo中的sql为db2的表结构查询语句,
    并且修改返回的实体类
    select * from sysibm.columns where tabschema = 'XXUSER' and tabname = 'PRODUCT' 
+```
+
+```
+有共享和贡献代码的道友欢迎来电:183 2872 0393
 ```
