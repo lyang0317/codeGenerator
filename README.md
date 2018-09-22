@@ -3,6 +3,8 @@
 2: 易拓展
 3: 后期添加各种java代码最佳实践代码生成
 # 使用特别简单,只用了velocity和java, 非常易与拓展
+   主要是要java处理数据格式,velocity用了替换模板中的代码, 对熟悉java的朋友拓展特别友好
+   
 第一步: 修改数据库连接,连接用户,和密码 
 ```
     --/resource/application-dev.xml
