@@ -14,20 +14,12 @@ import java.util.List;
 public class HelloVelocityTest {
     public static void main(String[] args) {
 
-
         System.out.println(System.getProperty("user.dir"));
-
-//        System.out.println(TestMain.class.getPackage().getName());
-
         VelocityEngine ve = new VelocityEngine();
         ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
         ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
-
         ve.init();
-
-        Template t = ve.getTemplate("templates/hellovelocity.vm");
-
-
+        Template t = ve.getTemplate("vm/hellovelocity.vm");
         VelocityContext ctx = new VelocityContext();
 
         ctx.put("name", "velocity");
