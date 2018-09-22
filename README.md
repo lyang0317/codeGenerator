@@ -2,7 +2,7 @@
 1: 基于velocity,SprongBoot的代码生成器 , 连接mysql, 通过数据库表生成实体类和注释
 2: 易拓展
 3: 后期添加各种java代码最佳实践代码生成
-
+# 使用特别简单,只用了velocity和java, 非常易与拓展
 第一步: 修改数据库连接,连接用户,和密码 
 ```
     --/resource/application-dev.xml
