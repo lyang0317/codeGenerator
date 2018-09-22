@@ -2,10 +2,12 @@ package com.gen.generator.main;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gen.config.ConfigData;
 import com.gen.core.GeneratorJavaFileUtils;
 import com.gen.core.InitGeneratedFileInfo;
 import com.gen.model.TableInfo;
 import com.gen.service.ErrBugTogetherService;
+import com.gen.util.FieldUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,26 +28,22 @@ public class GenerateJavaFileTest {
     @Autowired
     private ErrBugTogetherService errBugTogetherService;
 
-    /**
-     * 测试从数据库获取表的描述数据
-     *
-     * @throws JsonProcessingException
-     */
+    /** 运行代码, 直接生成文件于本项目/test/java/com.gen.generator.genFile下 */
     @Test
-    public void getAllTest() throws JsonProcessingException {
-        String tabName = "keyvalue_job";
-        String dbName = "axiom";
+    public void generateJavaFileEtc() {
+
+        String dbName = "axiom"; // 数据库名称
+        String tabName = "keyvalue_job"; //表名
+        ConfigData.setAuthorName("zhanSan");
+        ConfigData.setAuthorMail("zhanSan@gmail.com");
+
+        String keyValueJob = FieldUtils.lineToHumpGSetter(tabName); //实体类名称
         List<TableInfo> columnInfo = errBugTogetherService.getColumnInfo(tabName, dbName);
 
         GeneratorJavaFileUtils generatorJavaFileUtils = new GeneratorJavaFileUtils(columnInfo,tabName);
-        InitGeneratedFileInfo.initGeneratedFileInfo(generatorJavaFileUtils, "KeyValueJob");
-
-
-//        String json = new ObjectMapper().writeValueAsString(columnInfo);
-//        System.err.println(json);
+        InitGeneratedFileInfo.initGeneratedFileInfo(generatorJavaFileUtils, keyValueJob);
+        /** 填充到velocity中的数据的json形式 */
         System.err.println(GeneratorJavaFileUtils.tableInfoJson);
-
-
         boolean empty = ObjectUtils.isEmpty(columnInfo);
         assert (false == empty);
 
