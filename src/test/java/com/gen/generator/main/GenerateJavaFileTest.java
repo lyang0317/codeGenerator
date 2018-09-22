@@ -1,6 +1,7 @@
 package com.gen.generator.main;
 
 import com.gen.config.ConfigData;
+import com.gen.core.DataToVelocity;
 import com.gen.core.GeneratorJavaFileUtils;
 import com.gen.core.InitGeneratedFileInfo;
 import com.gen.model.TableInfo;
@@ -14,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author fanhb on 2018/9/21
@@ -35,6 +37,9 @@ public class GenerateJavaFileTest {
         String tabName = "keyvalue_job"; //表名
         ConfigData.setAuthorName("zhanSan");
         ConfigData.setAuthorMail("zhanSan@gmail.com");
+
+        /** 放入allDataToNgx,可以直接在模板引擎中使用 */
+//        Map<String, Object> allDataToNgx = DataToVelocity.getAllDataToNgx();
 
         String keyValueJob = FieldUtils.lineToHumpGSetter(tabName); //实体类名称
         List<TableInfo> columnInfo = errBugTogetherService.getColumnInfo(tabName, dbName);
