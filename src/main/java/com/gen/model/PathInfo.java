@@ -32,28 +32,12 @@ public class PathInfo {
     private static final String PROJECT_VALUE = classFileAbsPath.contains(GeneratorJavaFileUtils.PROJECT_TEST_PATH) ?
             ConfigData.DEF_PROJECT_TEST_PATH.getValue() : ConfigData.DEF_PROJECT_PATH.getValue();
 
-    private static final String PROJECT_DESC = ConfigData.DEF_PROJECT_PATH.getDesc();
-    public static Bean cacheMap = new Bean();
-
-    static {
-
-        System.out.println("\t\t\t#################################################");
-        System.out.println("\t\t\t#################################################");
-        System.out.println("\t\t\t######\t\t\t" + PROJECT_VALUE + "\t\t\t\t\t#");
-        System.out.println("\t\t\t######\t\t\t" + PROJECT_DESC + "\t#");
-        System.out.println("\t\t\t#################################################");
-        System.out.println("\t\t\t#################################################");
-
-    }
-
-
 
     /**
      * @return UserServiceImpl.java path eg: /Users/van/src/main/java/com/google/generator/service/impl
      */
     public static String getFileAbsPath(String configData, String dsName) {
         String fileAbsPath = absPath + PROJECT_VALUE + packagePath_ + configData;
-        cacheMap.put(dsName, fileAbsPath);
         return fileAbsPath;
     }
 

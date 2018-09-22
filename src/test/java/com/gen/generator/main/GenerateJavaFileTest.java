@@ -1,4 +1,4 @@
-package com.gen.err.bug.test;
+package com.gen.generator.main;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,7 +22,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ErrBugTest {
+public class GenerateJavaFileTest {
     @Autowired
     private ErrBugTogetherService errBugTogetherService;
 
@@ -38,11 +38,13 @@ public class ErrBugTest {
         List<TableInfo> columnInfo = errBugTogetherService.getColumnInfo(tabName, dbName);
 
         GeneratorJavaFileUtils generatorJavaFileUtils = new GeneratorJavaFileUtils(columnInfo);
-        InitGeneratedFileInfo.initGeneratedFileInfo(generatorJavaFileUtils, "User");
+        InitGeneratedFileInfo.initGeneratedFileInfo(generatorJavaFileUtils, "KeyValueJob");
 
 
-        String json = new ObjectMapper().writeValueAsString(columnInfo);
-        System.err.println(json);
+//        String json = new ObjectMapper().writeValueAsString(columnInfo);
+//        System.err.println(json);
+        System.err.println(GeneratorJavaFileUtils.tableInfoJson);
+
 
         boolean empty = ObjectUtils.isEmpty(columnInfo);
         assert (false == empty);

@@ -19,7 +19,7 @@ public class $!{bean.name}Entity {
 #foreach($data in $dataList )
 
     public void set$!{data.gsetter}(String $!{data.colNameHump}){
-        this.$!{data.colNameHump}=$!{data.colNameHump};
+        this.$!{data.colNameHump} = $!{data.colNameHump};
     }
 
     public String get$!{data.gsetter}(){

@@ -1,15 +1,8 @@
 package com.gen.core;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gen.config.ConfigData;
-import com.gen.model.TableInfo;
-import com.gen.model.Bean;
-import com.gen.model.DeveloperInfo;
-import com.gen.model.GeneratedFileInfo;
-import com.gen.model.PathInfo;
-import com.gen.util.FieldUtils;
-import com.gen.util.JsonFormatter;
+import com.gen.model.*;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -20,7 +13,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -39,7 +33,7 @@ public class GeneratorJavaFileUtils {
     private static Bean bean = new Bean();
     private List<TableInfo> dataList;
     private static DeveloperInfo developerInfo = new DeveloperInfo();
-
+    public static String tableInfoJson;
     public GeneratorJavaFileUtils(List<TableInfo> dataList) {
         this.dataList = dataList;
     }
@@ -138,18 +132,8 @@ public class GeneratorJavaFileUtils {
 
         //生成文件需要的主要数据
         velocityContext.put("dataList", dataList);
-        Map<String, Object> newMap = new HashMap<>();
-        for (TableInfo tableInfo : dataList) {
 
-
-            String colName = tableInfo.getColumnName();
-            String GSetter = FieldUtils.lineToHumpGSetter(colName);
-            newMap.put(GSetter,colName);
-        }
-        //生成getter,setter的驼峰数据
-        velocityContext.put("GSetter", newMap);
-//        System.out.println(fields);
-
+        tableInfoJson = new ObjectMapper().writeValueAsString(dataList);
         StringWriter stringWriter = new StringWriter();
         template.merge(velocityContext, stringWriter);
         return stringWriter.toString();
@@ -189,18 +173,6 @@ public class GeneratorJavaFileUtils {
      */
     private void showInfo(String info) {
         System.out.println("创建文件：" + info + "成功！");
-        System.out.println("====json======start====");
-        System.out.println("\t所有的路径信息如下: ");
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            System.out.println();
-            String json = mapper.writeValueAsString(PathInfo.cacheMap);
-            JsonFormatter.printFormattingJson(json);
-            System.out.println();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        System.out.println("====json======end======");
     }
 
     /**

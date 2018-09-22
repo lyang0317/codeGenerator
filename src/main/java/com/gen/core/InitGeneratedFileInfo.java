@@ -26,22 +26,22 @@ public class InitGeneratedFileInfo {
 
         //生成dao代码
         DAO.setJavaSuffix("Dao.java");
-        DAO.setVmName("beanDao.vm");
+        DAO.setVmName("vm/beanDao.vm");
         //生成dao代码
         DAO_IMPL.setJavaSuffix("DaoImpl.java");
-        DAO_IMPL.setVmName("beanDaoImpl.vm");
+        DAO_IMPL.setVmName("vm/beanDaoImpl.vm");
 
         SERVICE.setJavaSuffix("Service.java");
-        SERVICE.setVmName("beanService.vm");
+        SERVICE.setVmName("vm/beanService.vm");
 
         SERVICE_IMPL.setJavaSuffix("ServiceImpl.java");
-        SERVICE_IMPL.setVmName("beanServiceImpl.vm");
+        SERVICE_IMPL.setVmName("vm/beanServiceImpl.vm");
 
         MODEL.setJavaSuffix("Entity.java");
-        MODEL.setVmName("beanEntity.vm");
+        MODEL.setVmName("vm/beanEntity.vm");
 
         XML.setJavaSuffix("-Mapper.xml");
-        XML.setVmName("bean.xml.vm");
+        XML.setVmName("vm/bean.xml.vm");
 
 
 
@@ -50,25 +50,16 @@ public class InitGeneratedFileInfo {
         fileInfoList.add(SERVICE);
         fileInfoList.add(SERVICE_IMPL);
         fileInfoList.add(MODEL);
-        fileInfoList.add(MODEL);
+        fileInfoList.add(XML);
     }
 
     public static void initGeneratedFileInfo(GeneratorJavaFileUtils generatorJavaFileUtils, String targetEntity) {
 
-//        MODEL.setModelInfoMap("column_name","字段名称");
-//        MODEL.setModelInfoMap("column_comment","字段注释");
-//        MODEL.setModelInfoMap("data_type","数据类型");
-
         for (GeneratedFileInfo generatedFileInfo : fileInfoList) {
             generatedFileInfo.setDesc("desc");
             generatedFileInfo.setJavaFilePath("/genFile/");
+            generatorJavaFileUtils.createBeanFiles(targetEntity, generatedFileInfo);
         }
-
-        generatorJavaFileUtils.createBeanFiles(targetEntity, InitGeneratedFileInfo.DAO);
-        generatorJavaFileUtils.createBeanFiles(targetEntity, InitGeneratedFileInfo.DAO_IMPL);
-        generatorJavaFileUtils.createBeanFiles(targetEntity, InitGeneratedFileInfo.SERVICE);
-        generatorJavaFileUtils.createBeanFiles(targetEntity, InitGeneratedFileInfo.SERVICE_IMPL);
-        generatorJavaFileUtils.createBeanFiles(targetEntity, InitGeneratedFileInfo.MODEL);
     }
 
 

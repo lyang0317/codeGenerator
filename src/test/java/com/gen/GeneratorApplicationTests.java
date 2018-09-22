@@ -1,4 +1,4 @@
-package com.gen.generator;
+package com.gen;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

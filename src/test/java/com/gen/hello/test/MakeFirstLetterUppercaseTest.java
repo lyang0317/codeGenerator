@@ -1,4 +1,4 @@
-package com.gen.generator;
+package com.gen.hello.test;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

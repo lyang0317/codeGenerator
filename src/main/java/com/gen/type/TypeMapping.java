@@ -1,8 +1,8 @@
-package com.gen.demo.type;
+package com.gen.type;
 
 /**
- * @authorfanhbon2018/9/21
- * @descjdbc-java对应关系
+ * @author fanhbon2018/9/21
+ * @desc jdbc-java对应关系
  */
 public enum TypeMapping {
 
