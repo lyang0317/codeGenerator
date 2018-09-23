@@ -26,21 +26,21 @@
 
 
     <resultMap id="BaseResultMapId" type="com.gen.model.ErrBugTogetherEntity">
-        <result column="id"                 jdbcType="INT"         property="id"              />
+        <result column="id"                 jdbcType="BIGINT"         property="id"              />
         <result column="keyName"            jdbcType="VARCHAR"     property="keyName"         />
         <result column="question"           jdbcType="VARCHAR"     property="question"        />
         <result column="relatedPerson"      jdbcType="VARCHAR"     property="relatedPerson"   />
         <result column="principleContent"   jdbcType="VARCHAR"     property="principleContent"/>
         <result column="language"           jdbcType="VARCHAR"     property="language"        />
         <result column="axomName"           jdbcType="VARCHAR"     property="axomName"        />
-        <result column="calendar"           jdbcType="DATETIME"    property="calendar"        />
+        <result column="calendar"           jdbcType="TIMESTAMP"   property="calendar"        />
         <result column="webSite"            jdbcType="VARCHAR"     property="webSite"         />
-        <result column="largeContent"       jdbcType="TEXT"        property="largeContent"    />
+        <result column="largeContent"       jdbcType="VARCHAR"     property="largeContent"    />
         <result column="path"               jdbcType="VARCHAR"     property="path"            />
         <result column="dimension"          jdbcType="VARCHAR"     property="dimension"       />
         <result column="author"             jdbcType="VARCHAR"     property="author"          />
         <result column="situs"              jdbcType="VARCHAR"     property="situs"           />
-        <result column="status"             jdbcType="INT"         property="status"          />
+        <result column="status"             jdbcType="BIGINT"      property="status"          />
         <result column="updateTime"         jdbcType="TIMESTAMP"   property="updateTime"      />
         <result column="postscript"         jdbcType="VARCHAR"     property="postscript"      />
         <result column="createTime"         jdbcType="TIMESTAMP"   property="createTime"      />

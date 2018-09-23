@@ -9,7 +9,7 @@
     <resultMap id="BaseResultMapId" type="com.gen.model.ErrBugTogetherEntity">
 ##        <id column="id" jdbcType="BIGINT" property="id"/>
     #foreach($data in $dataList )
-        <result column=$!{data.colNameHumpQuota30} jdbcType=$!{data.dataTypeQuota30} property=$!{data.colNameHumpQuota30}/>
+    <result column=$!{data.colNameHumpQuota30} jdbcType=$!{data.dataTypeQuota30} property=$!{data.colNameHumpQuota30}/>
     #end
 
     </resultMap>

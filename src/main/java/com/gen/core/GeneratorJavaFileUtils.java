@@ -48,10 +48,10 @@ public class GeneratorJavaFileUtils {
                 length = curLength + 2;
             }
         }
-        if (length == 0 ){
+        if (length == 0) {
             length = 30;
         }
-        StringFormatUtil.format = "$-" + length + "s";
+        StringFormatUtil.format = "%-" + length + "s";
 
 
         this.dataList = dataList;
@@ -129,7 +129,7 @@ public class GeneratorJavaFileUtils {
             showInfo(fileName);
 
         } catch (Exception e) {
-            throw new RuntimeException("failed to create java files");
+            throw new RuntimeException("failed to create java files", e);
         }
     }
 

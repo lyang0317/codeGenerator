@@ -6,23 +6,18 @@ package com.gen.type;
  */
 public enum TypeMapping {
 
-    VARCHAR("java.lang.String", "String", "desc"),
-    CHAR("java.lang.String", "char", "desc"),
-    BLOB("java.lang.byte[]", "byte[]", "desc"),
-    INTEGER("java.lang.Long", "Long", "desc"),
-    TINYINT("java.lang.Integer", "Integer", "desc"),
-    SMALLINT("java.lang.Integer", "Integer", "desc"),
-    MEDIUMINT("java.lang.Integer", "Integer", "desc"),
-    BIT("java.lang.Boolean", "Boolean", "desc"),
-    BIGINT("java.math.BigInteger", "BigInteger", "desc"),
-    FLOAT("java.lang.Float", "Float", "desc"),
-    DOUBLE("java.lang.Double", "Double", "desc"),
-    DECIMAL("java.math.BigDecimal", "BigDecimal", "desc"),
-    DATE("java.util.Date", "Date", "desc"),
-    TIME("java.util.Date", "Date", "desc"),
-    DATETIME("java.util.Date", "Date", "desc"),
-    TIMESTAMP("java.util.Date", "Date", "desc"),
-    YEAR("java.util.Date", "Date", "desc");
+    BIGINT("java.lang.Long","Long", "desc"),
+    TINYINT("java.lang.Byte","Byte", "desc"),
+    SMALLINT("java.lang.Short","Short", "desc"),
+    MEDIUMIN("java.lang.Integer","Integer", "desc"),
+    INTEGER("java.lang.Integer","Integer", "desc"),
+    INT("java.lang.Integer","Integer", "desc"),
+    FLOAT("java.lang.Float","Float", "desc"),
+    DOUBLE("java.lang.Double","Double", "desc"),
+    DECIMAL("java.math.BigDecimal","BigDecimal", "desc"),
+    NUMERIC("java.math.BigDecimal","BigDecimal", "desc"),
+    CHAR("java.lang.String","String", "desc"),
+    VARCHAR("java.lang.String","String", "desc");
 
     private String path;
     private String type;
@@ -59,6 +54,7 @@ public enum TypeMapping {
     }
 
     public static TypeMapping getJavaType(String jdbcType) {
+
         for (TypeMapping typeMapping : TypeMapping.values()) {
             if (typeMapping.name().equalsIgnoreCase(jdbcType)){
                 return typeMapping;

@@ -7,6 +7,9 @@ import com.gen.util.StringFormatUtil;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author stefan
  * @version 0.0.1
@@ -15,7 +18,18 @@ import org.apache.commons.lang.StringUtils;
  */
 public class TableInfo {
 
-
+    public static String INT = "INT";
+    public static String INTEGER = "INTEGER";
+    public static String TEXT = "TEXT";
+    public static String VARCHAR = "VARCHAR";
+    public static String DATETIME = "DATETIME";
+    public static String TIMESTAMP = "TIMESTAMP";
+    private final static Map<String,String> map = new HashMap<>();
+    {
+        map.put(INT,INTEGER);
+        map.put(TEXT,VARCHAR);
+        map.put(DATETIME,TIMESTAMP);
+    }
     //字段名称
     private String columnName;
     private String columnName30;//定长
@@ -56,6 +70,11 @@ public class TableInfo {
     }
 
     public String getDataType() {
+        String keyUpper = dataType.toUpperCase();
+        if (map.containsKey(keyUpper)){
+            this.dataType = map.get(keyUpper);
+            return ObjectUtils.toString(map.get(dataType)).toUpperCase();
+        }
         return ObjectUtils.toString(dataType).toUpperCase();
     }
 
@@ -152,7 +171,14 @@ public class TableInfo {
     }
 
     public String getDataTypeQuota30() {
+        /** 如果是IBATIS不支持的类型, 通过map转换一下;  可能类型不全 */
         String upperCase = ObjectUtils.toString(dataType).toUpperCase();
+        String keyUpper = dataType.toUpperCase();
+
+        if (map.containsKey(keyUpper)){
+            dataType = map.get(keyUpper);
+            upperCase = ObjectUtils.toString(map.get(dataType)).toUpperCase();
+        }
         return StringFormatUtil.getQuotaFormat30(upperCase);
     }
 
@@ -183,5 +209,10 @@ public class TableInfo {
         TypeMapping javaType = TypeMapping.getJavaType(dataType);
         return javaType;
     }
+
+
+//INT
+//TEXT
+//DATETIME
 
 }
