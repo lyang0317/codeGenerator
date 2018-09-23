@@ -11,6 +11,8 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -27,6 +29,7 @@ import java.util.*;
  */
 
 public class GeneratorJavaFileUtils {
+    Logger logger = LoggerFactory.getLogger(GeneratorJavaFileUtils.class);
 
 
     public static String PROJECT_PATH = ConfigData.PROJECT_PATH.getValue();// /target/classes/
@@ -40,6 +43,7 @@ public class GeneratorJavaFileUtils {
     public static String tableInfoJson;
 
     public GeneratorJavaFileUtils(List<TableInfo> dataList, String tabName) {
+
 
         int length = 0;
         for (TableInfo tableInfo : dataList) {
@@ -183,9 +187,9 @@ public class GeneratorJavaFileUtils {
      */
     private void createFilePath(File file) {
         if (!file.exists()) {
-            System.out.println("创建文件夹[" + file.getAbsolutePath() + "]情况：" + file.mkdirs());
+            logger.info("创建文件夹[" + file.getAbsolutePath() + "]情况：" + file.mkdirs());
         } else {
-            System.out.println("存在文件夹：" + file.getAbsolutePath());
+            logger.info("存在文件夹：" + file.getAbsolutePath());
         }
     }
 
@@ -196,6 +200,7 @@ public class GeneratorJavaFileUtils {
      * @param info
      */
     private void showInfo(String info) {
+        logger.info("创建文件：" + info + "成功！");
         System.out.println("创建文件：" + info + "成功！");
     }
 

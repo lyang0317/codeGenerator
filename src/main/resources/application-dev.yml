@@ -58,3 +58,5 @@ pagehelper:
     returnPageInfo: check
 server:
   port: 8080
+#logging:
+#  level: error
